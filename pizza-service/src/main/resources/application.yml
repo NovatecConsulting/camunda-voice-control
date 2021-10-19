@@ -1,3 +1,11 @@
 micronaut:
   application:
     name: pizzaService
+camunda:
+  admin-user:
+    id: admin
+    password: admin
+  webapps:
+    enabled: true
+  rest:
+    enabled: true
