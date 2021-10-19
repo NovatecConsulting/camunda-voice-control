@@ -1,2 +1,3 @@
 .husky
+.idea
 node_modules

@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: info.novatec
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle_kotlin
+features: [annotation-api, app-name, assertj, camunda, gradle, h2, http-client, java, java-application, junit, logback, netty-server, readme, shade, yaml]
