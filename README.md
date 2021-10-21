@@ -43,3 +43,7 @@ conventional [commit messages](https://github.com/conventional-changelog/commitl
 3. `npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'` // Add hook
 
 Otherwise see here: https://commitlint.js.org/#/guides-local-setup
+
+### BPMN's to PNG
+1. `npm install -g bpmn-to-image`
+2. `npm run generate-bpmn-png`
