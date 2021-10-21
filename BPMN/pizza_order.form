@@ -9,29 +9,41 @@
     {
       "type": "textfield",
       "id": "Field_0ollp40",
-      "key": "ordered-items"
+      "key": "order",
+      "label": "Order Details"
     },
     {
-      "label": "Checkbox",
+      "text": "# To Do",
+      "type": "text",
+      "id": "Field_15lolay"
+    },
+    {
+      "label": "Open order",
       "type": "checkbox",
       "id": "Field_0wa5omj",
-      "key": "field_1s1amce"
+      "key": "opened"
     },
     {
-      "label": "Checkbox",
+      "label": "Start preparation",
       "type": "checkbox",
       "id": "Field_0evp4wq",
-      "key": "field_0kztgk0"
+      "key": "prep"
     },
     {
-      "label": "Done with the order?",
+      "label": "Pizza in oven",
       "type": "checkbox",
       "id": "Field_00zbwhw",
-      "key": "check"
+      "key": "oven"
+    },
+    {
+      "label": "Pizza in box",
+      "type": "checkbox",
+      "id": "Field_0usibqd",
+      "key": "boxed"
     },
     {
       "action": "submit",
-      "label": "Submit",
+      "label": "Order completed",
       "type": "button",
       "id": "Field_1yt0h6e",
       "key": "field_04jhdjh"

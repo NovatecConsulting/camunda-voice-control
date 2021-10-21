@@ -17,10 +17,9 @@ However, we are only looking on the "service view" of the process. So we collaps
 Next, we focus on the user task "Bake pizza". This will be the part of the process which we are
 going to control via voice. When baking a pizza we introduce some steps that need to be done:
 
-- Receive an order
 - View the order
-- Prepare the pizza
-- Bake Pizza
+- Start the preparation of the pizza
+- Put the pizza in the oven
 - Put the pizza in a carton
 
 All of these steps will take place within the kitchen. For the moment, we assume that there is only
