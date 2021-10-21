@@ -9,3 +9,5 @@ camunda:
     enabled: true
   rest:
     enabled: true
+  filter:
+    create: Show all
