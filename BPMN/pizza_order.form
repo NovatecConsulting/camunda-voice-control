@@ -12,6 +12,18 @@
       "key": "ordered-items"
     },
     {
+      "label": "Checkbox",
+      "type": "checkbox",
+      "id": "Field_0wa5omj",
+      "key": "field_1s1amce"
+    },
+    {
+      "label": "Checkbox",
+      "type": "checkbox",
+      "id": "Field_0evp4wq",
+      "key": "field_0kztgk0"
+    },
+    {
       "label": "Done with the order?",
       "type": "checkbox",
       "id": "Field_00zbwhw",
@@ -26,7 +38,7 @@
     }
   ],
   "type": "default",
-  "id": "pizza_order",
+  "id": "pizza_order_form",
   "executionPlatform": "Camunda Platform",
   "executionPlatformVersion": "7.16"
 }
