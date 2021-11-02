@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "components": [
+    {
+      "text": "# What do you want to order?",
+      "type": "text",
+      "id": "Field_0ysjxl9"
+    },
+    {
+      "type": "textfield",
+      "id": "Field_16qdcve",
+      "key": "order",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "action": "submit",
+      "label": "Order now",
+      "type": "button",
+      "id": "Field_063y60u",
+      "key": "field_0unvs9y"
+    }
+  ],
+  "type": "default",
+  "id": "pizza_start_form"
+}

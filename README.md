@@ -2,7 +2,7 @@
 
 An integration of Alexa and [Camunda BPM Platform](https://github.com/camunda/camunda-bpm-platform).
 
-For Camunda I use it integrated in
+I use Camunda BPM Platform integrated in
 Micronaut ([micronaut-camunda-bpm](https://github.com/camunda-community-hub/micronaut-camunda-bpm)).
 
 ## The process
