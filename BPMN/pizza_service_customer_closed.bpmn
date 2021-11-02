@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_01dofph" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="pizza_order">
-    <bpmn:participant id="Participant_0bnu6zp" name="Pizza order&#10;Delivery" processRef="Process_0u37ftr" />
+    <bpmn:participant id="Participant_0bnu6zp" name="Pizza order&#10;Delivery" processRef="pizza_delivery" />
     <bpmn:participant id="Participant_1k1z0hq" name="Customer" />
     <bpmn:messageFlow id="Flow_157sm0u" sourceRef="Participant_1k1z0hq" targetRef="Event_0qs61oy" />
     <bpmn:messageFlow id="Flow_0qro8s2" sourceRef="Activity_1bodxbi" targetRef="Participant_1k1z0hq" />
     <bpmn:messageFlow id="Flow_0ecuhsi" sourceRef="Activity_03blbxg" targetRef="Participant_1k1z0hq" />
     <bpmn:messageFlow id="Flow_06jzgen" sourceRef="Participant_1k1z0hq" targetRef="Activity_03blbxg" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0u37ftr" isExecutable="true">
+  <bpmn:process id="pizza_delivery" isExecutable="true">
     <bpmn:laneSet id="LaneSet_09h3wl0">
       <bpmn:lane id="Lane_1xyqhfl" name="pizza chef">
         <bpmn:flowNodeRef>Event_0qs61oy</bpmn:flowNodeRef>

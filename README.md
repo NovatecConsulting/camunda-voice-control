@@ -1,4 +1,4 @@
-# pizza-service
+# camunda-voice-control
 
 An integration of Alexa and [Camunda BPM Platform](https://github.com/camunda/camunda-bpm-platform).
 
@@ -7,7 +7,8 @@ Micronaut ([micronaut-camunda-bpm](https://github.com/camunda-community-hub/micr
 
 ## The process
 
-The following image shows the whole process. I took it from the book of Rücker & Freund.
+The following image shows a pizza delivery service process. I took it from the book of Rücker &
+Freund.
 ![The pizza service process](BPMN/PNG/full_process_overview_pizza_service.png "The pizza service process")
 > Source: Replicated from Page 98, Rücker, B., & Freund, J. (2019). Praxishandbuch BPMN 2.0: Mit Einführung in DMN. Carl Hanser Verlag GmbH Co KG.
 
@@ -44,5 +45,6 @@ conventional [commit messages](https://github.com/conventional-changelog/commitl
 Otherwise see here: https://commitlint.js.org/#/guides-local-setup
 
 ### BPMN's to PNG
+
 1. `npm install -g bpmn-to-image`
 2. `npm run generate-bpmn-png`
