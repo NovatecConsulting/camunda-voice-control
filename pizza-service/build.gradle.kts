@@ -21,7 +21,7 @@ micronaut {
 
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
-    implementation("info.novatec:micronaut-camunda-bpm-feature:2.1.0")
+    implementation("info.novatec:micronaut-camunda-bpm-feature:2.2.0")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("javax.annotation:javax.annotation-api")

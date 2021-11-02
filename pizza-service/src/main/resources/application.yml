@@ -2,6 +2,9 @@ micronaut:
   application:
     name: pizzaService
 camunda:
+  locations:
+    - classpath:.
+    - classpath:./BPMN
   admin-user:
     id: admin
     password: admin
