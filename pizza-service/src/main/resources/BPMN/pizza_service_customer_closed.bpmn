@@ -34,7 +34,7 @@
     <bpmn:sequenceFlow id="Flow_1hx73u1" sourceRef="Activity_0vguj78" targetRef="Activity_0xt3y63" />
     <bpmn:sequenceFlow id="Flow_0nfxpg6" sourceRef="Activity_1bodxbi" targetRef="Activity_03blbxg" />
     <bpmn:sequenceFlow id="Flow_19m882e" sourceRef="Activity_03blbxg" targetRef="Event_1k3u4d1" />
-    <bpmn:serviceTask id="Activity_0xt3y63" name="Generate invoice" camunda:delegateExpression="${generateRecipeDelegate}">
+    <bpmn:serviceTask id="Activity_0xt3y63" name="Generate invoice" camunda:delegateExpression="${generateInvoiceDelegate}">
       <bpmn:incoming>Flow_1hx73u1</bpmn:incoming>
       <bpmn:outgoing>Flow_1h3fyh1</bpmn:outgoing>
     </bpmn:serviceTask>

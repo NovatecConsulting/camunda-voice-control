@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-public class GenerateRecipeDelegate implements JavaDelegate {
+public class GenerateInvoiceDelegate implements JavaDelegate {
 
-  private static final Logger log = LoggerFactory.getLogger(GenerateRecipeDelegate.class);
+  private static final Logger log = LoggerFactory.getLogger(GenerateInvoiceDelegate.class);
 
   @Override
   public void execute(DelegateExecution delegateExecution) {
