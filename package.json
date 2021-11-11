@@ -8,6 +8,7 @@
     "bpmn-to-image": "^0.6.0"
   },
   "scripts": {
-    "generate-bpmn-png": "bpmn-to-image --no-footer pizza-service/src/main/resources/BPMN/pizza_service_customer_closed.bpmn;BPMN/PNG/pizza_service_customer_closed.png && bpmn-to-image --no-footer BPMN/full_process_overview_pizza_service.bpmn;BPMN/PNG/full_process_overview_pizza_service.png"
+    "generate-bpmn-png": "bpmn-to-image --no-footer pizza-service/src/main/resources/BPMN/pizza_service_customer_closed.bpmn;BPMN/PNG/pizza_service_customer_closed.png && bpmn-to-image --no-footer BPMN/full_process_overview_pizza_service.bpmn;BPMN/PNG/full_process_overview_pizza_service.png",
+    "ngrok": ".\\ngrok\\ngrok.exe http 8080"
   }
 }
