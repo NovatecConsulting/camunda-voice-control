@@ -14,3 +14,6 @@ camunda:
     enabled: true
   filter:
     create: Show all
+  generic-properties:
+    properties:
+      initialize-telemetry: true
