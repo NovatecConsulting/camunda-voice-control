@@ -65,6 +65,7 @@ function createLambdaNodeJS(camundaRestEndpoint) {
                   speakOutput = \`Aufgabe \${taskId}: \${task.name}. \${task.description}\`;
               }
               try {
+                // WHY DO I DO THIS
                   const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/variables\`);
                   const taskDetails = taskDetailsRequest.data;
                   const description = parseTaskDescription(task.description);
