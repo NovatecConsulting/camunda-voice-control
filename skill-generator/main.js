@@ -1,12 +1,22 @@
-<input type="file" id="file-selector" >
-<button id="button">click</button>
-<script>
+import lambdaNodeJSgitignore from './modules/gitignore.js'
+import createInteractionModelDe from './modules/interactionModel.js'
+import { createLambdaNodeJS, lambdaNodeJSPackageJson } from './modules/lambda.js'
 
+
+let camundaRestEndpoint;
+let invocationName;
+// XML
+const fileSelector = document.getElementById('file-selector');
+let fileList = undefined
+fileSelector.addEventListener('change', (event) => {
+    fileList = event.target.files;
+    readFile(fileList[0])
+});
 let userTasks = []
 
 function parseXML(xmlAsString) {
-  parser = new DOMParser();
-  xmlDoc = parser.parseFromString(xmlAsString, "text/xml");
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlAsString, "text/xml");
 
   const xmlUserTasks = xmlDoc.getElementsByTagName("bpmn:userTask")
   
@@ -42,18 +52,6 @@ function readFile(file) {
   reader.readAsText(file);
 }
 
-const fileSelector = document.getElementById('file-selector');
-let filelist
-fileSelector.addEventListener('change', (event) => {
-    fileList = event.target.files;
-});
-
-const button = document.getElementById("button");
-button.addEventListener("click", () => {
-  readFile(fileList[0])
-  userTasks.forEach(it => it.variables.length != 0 ? generateCompleteTaskSegment(it) : console.log("no vars"))
-})
-
 function generateCompleteTaskSegment(userTask) {
   // take first variable per default
   console.log(
@@ -66,6 +64,28 @@ function generateCompleteTaskSegment(userTask) {
 }
 // This should be added to CompleteTaskIntentHandler at the bottom:
 //   handlerInput.attributesManager.setSessionAttributes(attributes);
+// XML
+function generateZip() {
 
+  camundaRestEndpoint = document.getElementById("camundaRestEndpoint").value;
+  invocationName = document.getElementById("invocationName").value;
 
-</script>
+  const invocationNameSplit = invocationName.split(" ");
+  if (invocationNameSplit.length !== 2) {
+    alert("Invocation Name muss mindestens aus zwei Worten bestehen. Siehe auch https://developer.amazon.com/en-US/docs/alexa/custom-skills/choose-the-invocation-name-for-a-custom-skill.html#cert-invocation-name-req")
+  } else {
+    const zip = new JSZip();
+    zip.file(".gitignore", lambdaNodeJSgitignore);
+    zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint)).file("package.json", lambdaNodeJSPackageJson);
+    zip.folder("skill-package").folder("interactionModels").folder("custom").file("de-DE.json", createInteractionModelDe(invocationName));
+    zip.generateAsync({ type: "blob" }).then(function (blob) {
+      saveAs(blob, "camunda-alexa-skill.zip");
+    });
+  }
+}
+document.querySelector('#create').addEventListener("click", () => {
+   // could I also do on file load
+  userTasks.forEach(it => it.variables.length != 0 ? generateCompleteTaskSegment(it) : console.log("no vars"))
+
+  //generateZip()
+})
