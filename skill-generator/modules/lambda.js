@@ -62,7 +62,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         const attributes = handlerInput.attributesManager.getSessionAttributes();
         attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = 'Hallo, du kannst Aufgaben anfordern und abschließen. Was m\u00f6chtest du tun?'; 
+        const speakOutput = 'Hallo, du kannst Aufgaben anfordern und abschlie\u00dfen. Was m\u00f6chtest du tun?'; 
         handlerInput.attributesManager.setSessionAttributes(attributes);
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -225,7 +225,7 @@ const CompletedCompleteTaskIntentHandler = {
         ${completeTaskWithVars} else if (assignedTask.assignee === 'ALEXA') {
             try {
                 const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/complete\`, {});
-                speakOutput = \`Aufgabe \${taskId} abgeschlossen. Was möchtest du als naechstes tun?\`
+                speakOutput = \`Aufgabe \${taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?\`
             } catch (error) {
                 console.log(\`Complete task for taskId \${taskId} failed\`, error)
             }
@@ -350,7 +350,7 @@ const CompletedTaskDetailsIntentHandler = {
                 const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/variables\`);
                 const taskDetails = taskDetailsRequest.data;
                 const description = parseTaskDescription(assignedTask.description);
-                speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${description}. Was kann ich sonst noch für dich tun?\`;
+                speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${description}. Was kann ich sonst noch f\u00fcr dich tun?\`;
             } catch(error) {
                 console.log(\`GET task details for \${taskId} failed \`, error);
             }
@@ -371,7 +371,7 @@ const HelpIntentHandler = {
     handle(handlerInput) {
         const attributes = handlerInput.attributesManager.getSessionAttributes();
         attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = 'Ich kann dir eine Aufgabe geben, Du kannst deine Aufgaben abschließen oder dir Details geben lassen. Was möchtest du tun?';
+        const speakOutput = 'Ich kann dir eine Aufgabe geben, Du kannst deine Aufgaben abschlie\u00dfen oder dir Details geben lassen. Was m\u00f6chtest du tun?';
         handlerInput.attributesManager.setSessionAttributes(attributes);
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -389,7 +389,7 @@ const CancelAndStopIntentHandler = {
     handle(handlerInput) {
         const attributes = handlerInput.attributesManager.getSessionAttributes();
         attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = 'Tschüss!';
+        const speakOutput = 'Tsch\u00fcss!';
         handlerInput.attributesManager.setSessionAttributes(attributes);
         return handlerInput.responseBuilder
             .speak(speakOutput)
