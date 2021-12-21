@@ -60,10 +60,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const attributes = handlerInput.attributesManager.getSessionAttributes();
-        attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
         const speakOutput = 'Hallo, du kannst Aufgaben anfordern und abschlie\u00dfen. Was m\u00f6chtest du tun?'; 
-        handlerInput.attributesManager.setSessionAttributes(attributes);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -240,6 +237,44 @@ const CompletedCompleteTaskIntentHandler = {
             .reprompt(speakOutput)
             .getResponse();
     }
+}
+
+const YesAfterCompleteTaskIntentHandler = {
+    canHandle(handlerInput) {
+        const lastIntent = handlerInput.attributesManager.getSessionAttributes().lastIntent;
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.YesIntent'
+            && (lastIntent === 'CompleteTaskIntent' || lastIntent === 'AMAZON.YesIntent' || lastIntent === 'AMAZON.NoIntent');
+    },
+    async handle(handlerInput) {
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
+        const lastAskedVar = attributes.lastAskedVar;
+        attributes.vars[lastAskedVar] = true;
+        let speakOutput = "yehaa"
+        const keys = Object.keys(attributes.vars);
+        for (let i=0; i<keys.length; i++){
+              if (attributes.vars[keys[i]] === undefined){
+                  attributes.lastAskedVar = keys[i];
+                  speakOutput = "new question for this variable"
+                  break;
+              }
+          }
+        
+        handlerInput.attributesManager.setSessionAttributes(attributes);
+
+    return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    // check if there is a var left, else post complete task 
+    }
+    
+    
+}
+
+const NoAfterCompleteTaskIntentHandler = {
+    
 }
 
 const InProgressTaskDetailsIntentHandler = {
@@ -467,6 +502,8 @@ exports.handler = Alexa.SkillBuilders.custom()
         IdNotGivenCompleteTaskIntentHandler,
         InProgressCompleteTaskIntentHandler,
         CompletedCompleteTaskIntentHandler,
+        YesAfterCompleteTaskIntentHandler,
+        NoAfterCompleteTaskIntentHandler,
         IdNotGivenTaskDetailsIntentHandler,
         InProgressTaskDetailsIntentHandler,
         CompletedTaskDetailsIntentHandler,
