@@ -18,9 +18,22 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
         }
     }
 
+    let questions = "const questions = {"
+    userTasks.forEach(task => {
+        task.variables.forEach(variable => {
+        questions = questions + 
+            `"${variable.varName}": {
+            "question": "${variable.varQuestion}",
+            "type": "${variable.varType}"
+            },\n`
+        })  
+    })
+    questions = questions + "}"
+
     return `
     const Alexa = require('ask-sdk-core');
     const axios = require('axios');
+    ${questions}
     
     const camundaRestEndpoint = '${camundaRestEndpoint}';
     
@@ -47,8 +60,10 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
             return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
         },
         handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             const speakOutput = 'Hallo, du kannst Aufgaben anfordern und abschließen. Was m\u00f6chtest du tun?'; 
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -62,6 +77,8 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NewTaskIntent';
         },
         async handle(handlerInput){
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             let allTasks = [];
             
             try {
@@ -100,7 +117,7 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                     .reprompt(speakOutput)
                     .getResponse();
             }
-            
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .getResponse();
@@ -114,8 +131,10 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && Alexa.getDialogState(handlerInput.requestEnvelope) !== 'COMPLETED';
         },
         handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             const currentIntent = handlerInput.requestEnvelope.request.intent;
-            
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
               .addDelegateDirective(currentIntent)
               .getResponse();   
@@ -129,6 +148,8 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && !handlerInput.requestEnvelope.request.intent.slots.taskId.value;
         },
         async handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             let currentIntent = handlerInput.requestEnvelope.request.intent;
             const taskIdSlot = currentIntent.slots.taskId;
             
@@ -172,7 +193,7 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                     .getResponse();
     
             }
-      
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .getResponse();
@@ -228,8 +249,10 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && Alexa.getDialogState(handlerInput.requestEnvelope) !== 'COMPLETED';
         },
         handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             const currentIntent = handlerInput.requestEnvelope.request.intent;
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
               .addDelegateDirective(currentIntent)
               .getResponse();   
@@ -243,6 +266,8 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && !handlerInput.requestEnvelope.request.intent.slots.taskId.value;
         },
         async handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             let currentIntent = handlerInput.requestEnvelope.request.intent;
             const taskIdSlot = currentIntent.slots.taskId;
             
@@ -285,7 +310,7 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                     .getResponse();
     
             }
-      
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .getResponse();
@@ -300,6 +325,8 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && Alexa.getDialogState(handlerInput.requestEnvelope) === 'COMPLETED';
         },
         async handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             let currentIntent = handlerInput.requestEnvelope.request.intent;
             const taskId = currentIntent.slots.taskId.value;
             let assignedTask;
@@ -328,7 +355,7 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                     console.log(\`GET task details for \${taskId} failed \`, error);
                 }
             }
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -342,8 +369,10 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
         },
         handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             const speakOutput = 'Ich kann dir eine Aufgabe geben, Du kannst deine Aufgaben abschließen oder dir Details geben lassen. Was möchtest du tun?';
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -358,8 +387,10 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                     || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
         },
         handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             const speakOutput = 'Tschüss!';
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .getResponse();
@@ -376,8 +407,10 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
                 && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
         },
         handle(handlerInput) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             const speakOutput = 'Sorry, Da ist etwas schief gegangen. Probiere es bitte nochmal.';
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
@@ -410,9 +443,11 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
             return true;
         },
         handle(handlerInput, error) {
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             const speakOutput = 'Sorry, Ein Fehler ist aufgetreten. Bitte nochmal versuchen.';
             console.log(\`~~~~ Error handled: \${JSON.stringify(error)}\`);
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
