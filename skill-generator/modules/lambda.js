@@ -1,4 +1,23 @@
-function createLambdaNodeJS(camundaRestEndpoint) {
+function getAttributesString(userTask) {
+    let attributesString = "attributes.vars = {\n"
+    userTask.variables.forEach(it => {
+      attributesString = attributesString + `        "${it.varName}": undefined,\n`
+    })
+    attributesString = attributesString + "    }"
+    return attributesString;
+  }
+
+function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
+    let completeTaskWithVars = ""
+    for(let i = 0; i < userTasks.length; i++) {
+      getAttributesString(userTasks[i])
+        if (userTasks[i].variables.length > 0 && i === 0) {
+          completeTaskWithVars = completeTaskWithVars + `if (assignedTask.name === '${userTasks[i].taskName}') {\n    ${getAttributesString(userTasks[i])};\n    attributes.lastAskedVar = "${userTasks[i].variables[0].varName}"\n    speakOutput = \`${userTasks[i].variables[0].varQuestion}\`\n}`
+        } else if (userTasks[i].variables.length > 0 && i != 0) {
+          completeTaskWithVars = completeTaskWithVars + ` else if (assignedTask.name === '${userTasks[i].taskName}') {\n    ${getAttributesString(userTasks[i])};\n    attributes.lastAskedVar = "${userTasks[i].variables[0].varName}"\n    speakOutput = \`${userTasks[i].variables[0].varQuestion}\`\n}`
+        }
+    }
+
     return `
     const Alexa = require('ask-sdk-core');
     const axios = require('axios');
@@ -28,7 +47,7 @@ function createLambdaNodeJS(camundaRestEndpoint) {
             return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
         },
         handle(handlerInput) {
-            const speakOutput = 'Hallo, du kannst Aufgaben anfordern und abschließen. Was möchtest du tun?'; 
+            const speakOutput = 'Hallo, du kannst Aufgaben anfordern und abschließen. Was m\u00f6chtest du tun?'; 
     
             return handlerInput.responseBuilder
                 .speak(speakOutput)
@@ -170,7 +189,8 @@ function createLambdaNodeJS(camundaRestEndpoint) {
         async handle(handlerInput) {
             let currentIntent = handlerInput.requestEnvelope.request.intent;
             const taskId = currentIntent.slots.taskId.value;
-            
+            const attributes = handlerInput.attributesManager.getSessionAttributes();
+            attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
             let assignedTask;
     
             let speakOutput = 'Diese Aufgabe kenne ich nicht.'
@@ -181,8 +201,7 @@ function createLambdaNodeJS(camundaRestEndpoint) {
             } catch (error) {
                 console.log(\`GET task for taskId \${taskId} failed\`, error)
             }
-            
-            if (assignedTask.assignee === 'ALEXA') {
+            ${completeTaskWithVars} else if (assignedTask.assignee === 'ALEXA') {
                 try {
                     const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/complete\`, {});
                     speakOutput = \`Aufgabe \${taskId} abgeschlossen. Was möchtest du als naechstes tun?\`
@@ -190,8 +209,11 @@ function createLambdaNodeJS(camundaRestEndpoint) {
                     console.log(\`Complete task for taskId \${taskId} failed\`, error)
                 }
                 
+            } else {
+                speakOutput = "Da ist etwas schief gegangen."
             }
-    
+            handlerInput.attributesManager.setSessionAttributes(attributes);
+   
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)

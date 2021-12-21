@@ -76,16 +76,19 @@ function generateZip() {
   } else {
     const zip = new JSZip();
     zip.file(".gitignore", lambdaNodeJSgitignore);
-    zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint)).file("package.json", lambdaNodeJSPackageJson);
+    zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint, userTasks)).file("package.json", lambdaNodeJSPackageJson);
     zip.folder("skill-package").folder("interactionModels").folder("custom").file("de-DE.json", createInteractionModelDe(invocationName));
     zip.generateAsync({ type: "blob" }).then(function (blob) {
       saveAs(blob, "camunda-alexa-skill.zip");
     });
   }
 }
+
+
+
 document.querySelector('#create').addEventListener("click", () => {
    // could I also do on file load
-  userTasks.forEach(it => it.variables.length != 0 ? generateCompleteTaskSegment(it) : console.log("no vars"))
-
-  //generateZip()
+  //userTasks.forEach(it => it.variables.length != 0 ? generateCompleteTaskSegment(it) : console.log("no vars"))
+  
+  generateZip()
 })
