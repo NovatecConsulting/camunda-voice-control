@@ -7,13 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-public class GenerateInvoiceDelegate implements JavaDelegate {
+public class DiscountDelegate implements JavaDelegate {
 
-  private static final Logger log = LoggerFactory.getLogger(GenerateInvoiceDelegate.class);
+  private static final Logger log = LoggerFactory.getLogger(DiscountDelegate.class);
 
   @Override
   public void execute(DelegateExecution delegateExecution) {
     String order = (String) delegateExecution.getVariable("order");
-    log.info(String.format("Generating Recipe for %s!", order));
+    log.info(String.format("10%% Discount for %s!", order));
   }
 }
