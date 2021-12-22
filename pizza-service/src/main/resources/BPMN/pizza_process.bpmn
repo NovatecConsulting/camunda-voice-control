@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0o2cbc9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0o2cbc9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:process id="bake-pizza" isExecutable="true">
     <bpmn:sequenceFlow id="Flow_0sl9b5f" sourceRef="StartEvent_1" targetRef="Activity_0vdpui3" />
     <bpmn:sequenceFlow id="Flow_0buq6oj" sourceRef="Activity_0vdpui3" targetRef="Activity_0m4q1ae" />
     <bpmn:sequenceFlow id="Flow_11o2evf" sourceRef="Activity_0m4q1ae" targetRef="Activity_1g03lw7" />
-    <bpmn:endEvent id="Event_1gslwul">
-      <bpmn:incoming>Flow_18u610l</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:userTask id="Activity_0vdpui3" name="zubereiten">
+    <bpmn:userTask id="Activity_0vdpui3" name="Zubereiten">
       <bpmn:documentation>Du musst ${order} zubereiten.</bpmn:documentation>
       <bpmn:incoming>Flow_0sl9b5f</bpmn:incoming>
       <bpmn:outgoing>Flow_0buq6oj</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0m4q1ae" name="backen" camunda:formRef="" camunda:formRefBinding="latest">
+    <bpmn:userTask id="Activity_0m4q1ae" name="Backen" camunda:formRef="" camunda:formRefBinding="latest">
       <bpmn:incoming>Flow_0buq6oj</bpmn:incoming>
       <bpmn:outgoing>Flow_11o2evf</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_1g03lw7" name="verpacken">
+    <bpmn:userTask id="Activity_1g03lw7" name="Verpacken">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="burned" type="boolean">
@@ -32,20 +29,38 @@
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_11o2evf</bpmn:incoming>
-      <bpmn:outgoing>Flow_18u610l</bpmn:outgoing>
+      <bpmn:outgoing>Flow_05vwu4z</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:startEvent id="StartEvent_1" camunda:formRef="pizza_start_form" camunda:formRefBinding="deployment">
       <bpmn:outgoing>Flow_0sl9b5f</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_18u610l" sourceRef="Activity_1g03lw7" targetRef="Event_1gslwul" />
+    <bpmn:exclusiveGateway id="Gateway_1emz48s">
+      <bpmn:incoming>Flow_05vwu4z</bpmn:incoming>
+      <bpmn:outgoing>Flow_057px61</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1dgr9nt</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_05vwu4z" sourceRef="Activity_1g03lw7" targetRef="Gateway_1emz48s" />
+    <bpmn:endEvent id="Event_0eyu20h">
+      <bpmn:incoming>Flow_057px61</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_057px61" sourceRef="Gateway_1emz48s" targetRef="Event_0eyu20h">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!burned}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1dgr9nt" name="burned == true" sourceRef="Gateway_1emz48s" targetRef="Activity_154ew12">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${burned}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_135dfrg">
+      <bpmn:incoming>Flow_012lzxr</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_012lzxr" sourceRef="Activity_154ew12" targetRef="Event_135dfrg" />
+    <bpmn:userTask id="Activity_154ew12" name="Rabatt geben">
+      <bpmn:incoming>Flow_1dgr9nt</bpmn:incoming>
+      <bpmn:outgoing>Flow_012lzxr</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:message id="Message_0naujbp" name="Message_2o0nu86" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="bake-pizza">
-      <bpmndi:BPMNEdge id="Flow_18u610l_di" bpmnElement="Flow_18u610l">
-        <di:waypoint x="690" y="117" />
-        <di:waypoint x="782" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_11o2evf_di" bpmnElement="Flow_11o2evf">
         <di:waypoint x="530" y="117" />
         <di:waypoint x="590" y="117" />
@@ -57,6 +72,29 @@
       <bpmndi:BPMNEdge id="Flow_0sl9b5f_di" bpmnElement="Flow_0sl9b5f">
         <di:waypoint x="215" y="117" />
         <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05vwu4z_di" bpmnElement="Flow_05vwu4z">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="755" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_057px61_di" bpmnElement="Flow_057px61">
+        <di:waypoint x="805" y="117" />
+        <di:waypoint x="872" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="821" y="99" width="35" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dgr9nt_di" bpmnElement="Flow_1dgr9nt">
+        <di:waypoint x="780" y="142" />
+        <di:waypoint x="780" y="230" />
+        <di:waypoint x="880" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="743" y="232.9999999999999" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_012lzxr_di" bpmnElement="Flow_012lzxr">
+        <di:waypoint x="980" y="230" />
+        <di:waypoint x="1062" y="230" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0i45sdt_di" bpmnElement="Activity_0vdpui3">
         <dc:Bounds x="270" y="77" width="100" height="80" />
@@ -70,8 +108,17 @@
       <bpmndi:BPMNShape id="Event_1tv67pq_di" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1gslwul_di" bpmnElement="Event_1gslwul">
-        <dc:Bounds x="782" y="99" width="36" height="36" />
+      <bpmndi:BPMNShape id="Gateway_1emz48s_di" bpmnElement="Gateway_1emz48s" isMarkerVisible="true">
+        <dc:Bounds x="755" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0eyu20h_di" bpmnElement="Event_0eyu20h">
+        <dc:Bounds x="872" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_135dfrg_di" bpmnElement="Event_135dfrg">
+        <dc:Bounds x="1062" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1e06eyw_di" bpmnElement="Activity_154ew12">
+        <dc:Bounds x="880" y="190" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
