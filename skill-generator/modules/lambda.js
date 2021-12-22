@@ -79,7 +79,7 @@ const NewTaskIntentHandler = {
         let allTasks = [];
         
         try {
-            const response = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task?unassigned=true\`);
+            const response = await axios.get(\`\${camundaRestEndpoint}/task?unassigned=true\`);
             allTasks = response.data;
         } catch(error) {
             console.log('GET all unassigned tasks failed ', error);
@@ -96,7 +96,7 @@ const NewTaskIntentHandler = {
             }
             try {
                 // WHY DO I DO THIS
-                const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/variables\`);
+                const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/task/\${taskId}/variables\`);
                 const taskDetails = taskDetailsRequest.data;
                 const description = parseTaskDescription(task.description);
                 speakOutput = \`Aufgabe \${taskId}: \${task.name}. \${description}\`;
@@ -104,7 +104,7 @@ const NewTaskIntentHandler = {
                 console.log(\`GET task details for \${taskId} failed \`, error);
             }
             try {
-                const claimTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/claim\`, {"userId": "ALEXA"});
+                const claimTask = await axios.post(\`\${camundaRestEndpoint}/task/\${taskId}/claim\`, {"userId": "ALEXA"});
             } catch(error){
                 console.log(\`POST claim task for task \${taskId} failed \`, error);
             }
@@ -155,7 +155,7 @@ const IdNotGivenCompleteTaskIntentHandler = {
         let speakOutput = 'Du musst gerade keine Aufgaben bearbeiten.';
 
         try {
-            const fetchAssignedTasks = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task?assignee=ALEXA\`);
+            const fetchAssignedTasks = await axios.get(\`\${camundaRestEndpoint}/task?assignee=ALEXA\`);
             allAssignedTasks = fetchAssignedTasks.data;
         } catch(error) {
             console.log('GET all to ALEXA assigend tasks failed ', error);
@@ -214,7 +214,7 @@ const CompletedCompleteTaskIntentHandler = {
         let speakOutput = 'Diese Aufgabe kenne ich nicht.'
 
         try {
-            const response = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}\`);
+            const response = await axios.get(\`\${camundaRestEndpoint}/task/\${taskId}\`);
             assignedTask = response.data;
         } catch (error) {
             console.log(\`GET task for taskId \${taskId} failed\`, error)
@@ -222,7 +222,7 @@ const CompletedCompleteTaskIntentHandler = {
         attributes.taskId = taskId;
         ${completeTaskWithVars} else if (assignedTask.assignee === 'ALEXA') {
             try {
-                const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/complete\`, {});
+                const completeTask = await axios.post(\`\${camundaRestEndpoint}/task/\${taskId}/complete\`, {});
                 speakOutput = \`Aufgabe \${taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?\`
             } catch (error) {
                 console.log(\`Complete task for taskId \${taskId} failed\`, error)
@@ -273,7 +273,7 @@ const YesAfterCompleteTaskIntentHandler = {
                     postBody.variables[it] = {} 
                     postBody.variables[it].value = attributes.vars[it]
                 }) 
-                const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${attributes.taskId}/complete\`, postBody);
+                const completeTask = await axios.post(\`\${camundaRestEndpoint}/task/\${attributes.taskId}/complete\`, postBody);
                 speakOutput = \`Aufgabe \${attributes.taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?\`
             } catch (error) {
                 console.log(\`Complete task for taskId \${attributes.taskId} failed\`, error)
@@ -322,7 +322,7 @@ const NoAfterCompleteTaskIntentHandler = {
                     postBody.variables[it] = {} 
                     postBody.variables[it].value = attributes.vars[it]
                 }) 
-                const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${attributes.taskId}/complete\`, postBody);
+                const completeTask = await axios.post(\`\${camundaRestEndpoint}/task/\${attributes.taskId}/complete\`, postBody);
                 speakOutput = \`Aufgabe \${attributes.taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?\`
             } catch (error) {
                 console.log(\`Complete task for taskId \${attributes.taskId} failed\`, error)
@@ -372,7 +372,7 @@ const IdNotGivenTaskDetailsIntentHandler = {
         let speakOutput = 'Du musst gerade keine Aufgaben bearbeiten.';
 
         try {
-            const fetchAssignedTasks = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task?assignee=ALEXA\`);
+            const fetchAssignedTasks = await axios.get(\`\${camundaRestEndpoint}/task?assignee=ALEXA\`);
             allAssignedTasks = fetchAssignedTasks.data;
         } catch(error) {
             console.log('GET all to ALEXA assigend tasks failed ', error);
@@ -430,7 +430,7 @@ const CompletedTaskDetailsIntentHandler = {
         let speakOutput = 'Diese Aufgabe kenne ich nicht.'
 
         try {
-            const response = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}\`);
+            const response = await axios.get(\`\${camundaRestEndpoint}/task/\${taskId}\`);
             assignedTask = response.data;
         } catch (error) {
             console.log(\`GET task for taskId \${taskId} failed\`, error)
@@ -443,7 +443,7 @@ const CompletedTaskDetailsIntentHandler = {
                 speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${assignedTask.description}\`;
             }
             try {
-                const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/variables\`);
+                const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/task/\${taskId}/variables\`);
                 const taskDetails = taskDetailsRequest.data;
                 const description = parseTaskDescription(assignedTask.description);
                 speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${description}. Was kann ich sonst noch f\u00fcr dich tun?\`;
