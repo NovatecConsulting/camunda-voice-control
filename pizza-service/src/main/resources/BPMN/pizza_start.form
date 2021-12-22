@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "components": [
     {
-      "text": "# What do you want to order?",
+      "text": "# Was möchtest du bestellen?",
       "type": "text",
       "id": "Field_0ysjxl9"
     },
@@ -16,7 +16,7 @@
     },
     {
       "action": "submit",
-      "label": "Order now",
+      "label": "Jetzt bestellen",
       "type": "button",
       "id": "Field_063y60u",
       "key": "field_0unvs9y"
