@@ -1,7 +1,7 @@
 function getAttributesString(userTask) {
     let attributesString = "attributes.vars = {\n"
     userTask.variables.forEach(it => {
-        attributesString = attributesString + `        "${it.varName}": undefined,\n`
+        attributesString = attributesString + `        "${it.varName}": "", // vars need to be initialized\n` 
     })
     attributesString = attributesString + "    }"
     return attributesString;
@@ -256,7 +256,7 @@ const YesAfterCompleteTaskIntentHandler = {
         let done = true;
         const keys = Object.keys(attributes.vars);
         for (let i = 0; i < keys.length; i++) {
-            if (attributes.vars[keys[i]] === undefined) {
+            if (attributes.vars[keys[i]] === "") {
                 attributes.lastAskedVar = keys[i];
                 speakOutput = questions[keys[i]].question; // TODO Check if this really works..
                 done = false;
