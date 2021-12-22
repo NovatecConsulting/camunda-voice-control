@@ -10,9 +10,10 @@ function getAttributesString(userTask) {
 function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
     let completeTaskWithVars = ""
     for (let i = 0; i < userTasks.length; i++) {
-        getAttributesString(userTasks[i])
-        if (userTasks[i].variables.length > 0 && i === 0) {
+        let first = true;
+        if (userTasks[i].variables.length > 0 && first) {
             completeTaskWithVars = completeTaskWithVars + `if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion};\`\n        }`
+            first = false;
         } else if (userTasks[i].variables.length > 0 && i != 0) {
             completeTaskWithVars = completeTaskWithVars + ` else if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion};\`\n        }`
         }
@@ -297,7 +298,7 @@ const NoAfterCompleteTaskIntentHandler = {
         attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
         const lastAskedVar = attributes.lastAskedVar;
         attributes.vars[lastAskedVar] = false;
-        let speakOutput = "yehaa"
+        let speakOutput = "unbekannt"
         let done = true;
         const keys = Object.keys(attributes.vars);
         for (let i = 0; i < keys.length; i++) {
