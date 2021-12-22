@@ -258,7 +258,7 @@ const YesAfterCompleteTaskIntentHandler = {
         for (let i = 0; i < keys.length; i++) {
             if (attributes.vars[keys[i]] === "") {
                 attributes.lastAskedVar = keys[i];
-                speakOutput = questions[keys[i]].question; // TODO Check if this really works..
+                speakOutput = questions[keys[i]].question;
                 done = false;
                 break;
             }
@@ -286,12 +286,56 @@ const YesAfterCompleteTaskIntentHandler = {
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
-        // check if there is a var left, else post complete task 
     }
 }
 
 const NoAfterCompleteTaskIntentHandler = {
-    
+    canHandle(handlerInput) {
+        const lastIntent = handlerInput.attributesManager.getSessionAttributes().lastIntent;
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.YesIntent'
+            && (lastIntent === 'CompleteTaskIntent' || lastIntent === 'AMAZON.YesIntent' || lastIntent === 'AMAZON.NoIntent');
+    },
+    async handle(handlerInput) {
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
+        const lastAskedVar = attributes.lastAskedVar;
+        attributes.vars[lastAskedVar] = false;
+        let speakOutput = "yehaa"
+        let done = true;
+        const keys = Object.keys(attributes.vars);
+        for (let i = 0; i < keys.length; i++) {
+            if (attributes.vars[keys[i]] === "") {
+                attributes.lastAskedVar = keys[i];
+                speakOutput = questions[keys[i]].question;
+                done = false;
+                break;
+            }
+        }
+        if (done) {
+            try {
+                let postBody = {
+                    "variables": {}
+                }
+                const keys = Object.keys(attributes.vars)
+                keys.forEach( it => {
+                    postBody.variables[it] = {} 
+                    postBody.variables[it].value = attributes.vars[it]
+                }) 
+                const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${attributes.taskId}/complete\`, postBody);
+                speakOutput = \`Aufgabe \${attributes.taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?\`
+            } catch (error) {
+                console.log(\`Complete task for taskId \${attributes.taskId} failed\`, error)
+            }
+        }
+
+        handlerInput.attributesManager.setSessionAttributes(attributes);
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }    
 }
 
 const InProgressTaskDetailsIntentHandler = {
