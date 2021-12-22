@@ -293,7 +293,7 @@ const NoAfterCompleteTaskIntentHandler = {
     canHandle(handlerInput) {
         const lastIntent = handlerInput.attributesManager.getSessionAttributes().lastIntent;
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.YesIntent'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent'
             && (lastIntent === 'CompleteTaskIntent' || lastIntent === 'AMAZON.YesIntent' || lastIntent === 'AMAZON.NoIntent');
     },
     async handle(handlerInput) {
