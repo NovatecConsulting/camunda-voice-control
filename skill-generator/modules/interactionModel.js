@@ -41,7 +41,8 @@ export default function createInteractionModelDe(invocationName) {
                 "was war nochmal aufgabe {taskId}",
                 "gib mir details zu aufgabe {taskId}",
                 "was muss ich gerade nochmal tun",
-                "was muss ich gerade tun"
+                "was muss ich gerade tun",
+                "was ist nochmal meine aufgabe"
               ]
             },
             {
