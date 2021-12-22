@@ -219,6 +219,7 @@ const CompletedCompleteTaskIntentHandler = {
         } catch (error) {
             console.log(\`GET task for taskId \${taskId} failed\`, error)
         }
+        attributes.taskId = taskId;
         ${completeTaskWithVars} else if (assignedTask.assignee === 'ALEXA') {
             try {
                 const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${taskId}/complete\`, {});
@@ -252,25 +253,41 @@ const YesAfterCompleteTaskIntentHandler = {
         const lastAskedVar = attributes.lastAskedVar;
         attributes.vars[lastAskedVar] = true;
         let speakOutput = "yehaa"
+        let done = true;
         const keys = Object.keys(attributes.vars);
-        for (let i=0; i<keys.length; i++){
-              if (attributes.vars[keys[i]] === undefined){
-                  attributes.lastAskedVar = keys[i];
-                  speakOutput = "new question for this variable"
-                  break;
-              }
-          }
-        
+        for (let i = 0; i < keys.length; i++) {
+            if (attributes.vars[keys[i]] === undefined) {
+                attributes.lastAskedVar = keys[i];
+                speakOutput = questions[keys[i]].question; // TODO Check if this really works..
+                done = false;
+                break;
+            }
+        }
+        if (done) {
+            try {
+                let postBody = {
+                    "variables": {}
+                }
+                const keys = Object.keys(attributes.vars)
+                keys.forEach( it => {
+                    postBody.variables[it] = {} 
+                    postBody.variables[it].value = attributes.vars[it]
+                }) 
+                const completeTask = await axios.post(\`\${camundaRestEndpoint}/engine-rest/task/\${attributes.taskId}/complete\`, postBody);
+                speakOutput = \`Aufgabe \${attributes.taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?\`
+            } catch (error) {
+                console.log(\`Complete task for taskId \${attributes.taskId} failed\`, error)
+            }
+        }
+
         handlerInput.attributesManager.setSessionAttributes(attributes);
 
-    return handlerInput.responseBuilder
+        return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
-    // check if there is a var left, else post complete task 
+        // check if there is a var left, else post complete task 
     }
-    
-    
 }
 
 const NoAfterCompleteTaskIntentHandler = {

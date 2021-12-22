@@ -58,6 +58,14 @@ export default function createInteractionModelDe(invocationName) {
                 "aufgabe ist fertig",
                 "ich bin fertig"
               ]
+            },
+            {
+              "name": "AMAZON.YesIntent",
+              "samples": []
+            },
+            {
+              "name": "AMAZON.NoIntent",
+              "samples": []
             }
           ],
           "types": []
