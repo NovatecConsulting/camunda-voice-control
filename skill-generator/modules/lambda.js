@@ -1,9 +1,9 @@
 function getAttributesString(userTask) {
     let attributesString = "attributes.vars = {\n"
     userTask.variables.forEach(it => {
-        attributesString = attributesString + `        "${it.varName}": "", // vars need to be initialized\n` 
+        attributesString = attributesString + `                "${it.varName}": "", // vars need to be initialized\n` 
     })
-    attributesString = attributesString + "    }"
+    attributesString = attributesString + "            }"
     return attributesString;
 }
 
@@ -12,20 +12,16 @@ function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
     for (let i = 0; i < userTasks.length; i++) {
         getAttributesString(userTasks[i])
         if (userTasks[i].variables.length > 0 && i === 0) {
-            completeTaskWithVars = completeTaskWithVars + `if (assignedTask.name === '${userTasks[i].taskName}') {\n    ${getAttributesString(userTasks[i])};\n    attributes.lastAskedVar = "${userTasks[i].variables[0].varName}"\n    speakOutput = \`${userTasks[i].variables[0].varQuestion}\`\n}`
+            completeTaskWithVars = completeTaskWithVars + `if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion};\`\n        }`
         } else if (userTasks[i].variables.length > 0 && i != 0) {
-            completeTaskWithVars = completeTaskWithVars + ` else if (assignedTask.name === '${userTasks[i].taskName}') {\n    ${getAttributesString(userTasks[i])};\n    attributes.lastAskedVar = "${userTasks[i].variables[0].varName}"\n    speakOutput = \`${userTasks[i].variables[0].varQuestion}\`\n}`
+            completeTaskWithVars = completeTaskWithVars + ` else if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion};\`\n        }`
         }
     }
 
-    let questions = "const questions = {"
+    let questions = "const questions = {\n"
     userTasks.forEach(task => {
         task.variables.forEach(variable => {
-            questions = questions +
-                `"${variable.varName}": {
-            "question": "${variable.varQuestion}",
-            "type": "${variable.varType}"
-            },\n`
+            questions = questions +`    "${variable.varName}": {\n        "question": "${variable.varQuestion}",\n        "type": "${variable.varType}"\n    },\n`
         })
     })
     questions = questions + "}"
@@ -252,7 +248,7 @@ const YesAfterCompleteTaskIntentHandler = {
         attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
         const lastAskedVar = attributes.lastAskedVar;
         attributes.vars[lastAskedVar] = true;
-        let speakOutput = "yehaa"
+        let speakOutput = "unbekannt"
         let done = true;
         const keys = Object.keys(attributes.vars);
         for (let i = 0; i < keys.length; i++) {
