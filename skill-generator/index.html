@@ -12,14 +12,11 @@
 
 <body>
   <div class="container my-3">
-    <h1>Alexa Skill Generator by Novatec</h1>
-    <h2>Requirements</h2>
-    <ul>
-      <li>VS Code with the Alexa Skills Toolkit Plugin installed</li>
-      <li>NPM</li>
-      <li>ASK Account</li>
-      <li>Git</li>
-    </ul>
+    <h1>Alexa Skill Generator for Camunda Platform</h1>
+    <div>This Generator was build by Martin Sawilla at Novatec Consulting GmbH</div>
+    
+    <div class="my-5"><!--Spacer div--></div>
+    
     <h2>Generator</h2>
     <form>
       <div class="mb-3 row">
@@ -46,14 +43,46 @@
       </div>
       <button id="create" type="button" class="btn btn-info">Create Skill</button>
     </form>
-    <h2>How to use the code</h2>
+    
+    <div class="my-5"><!--Spacer div--></div>
+    
+    <h2>How to use the Generator</h2>
+    <h3>Requirements</h3>
+    <ul>
+      <li>VS Code with the Alexa Skills Toolkit Plugin installed</li>
+      <li>Alexa Skills Kit Developer Account</li>
+      <li>NPM</li>
+      <li>Git</li>
+    </ul>
+    <h3>Instructions</h3>
     <ol>
-      <li>Use VS Code Plugin to create an Alexa hosted skill</li>
-      <li>Copy and paste files from generator</li>
-      <li>Go in folder lambda -> npm install</li>
-      <li>Git stage and commit</li>
-      <li>Deploy with plugin</li>
-      <li>Enjoy! (listen to your process and speak to it)</li>
+      <li>Install <b>Alexa Skills Kit (ASK) Toolkit</b>, navigate to the extension and sign in with your developer account.</li>
+      <li>Create a new skill using that extension:
+        <ol>
+          <li>Choose a skill name.</li>
+          <li>Set the default language (at the moment, only <b>German (DE)</b> is supported by the generator).</li>
+          <li>Choose <b>custom skill</b>.</li>
+          <li>Choose <b>alexa-hosted</b> (You can also provide your own backend ressource, but I did not test it yet).</li>
+          <li>Choose the hosting runtime <b>Alexa-Hosted (Node.js)</b> (The generator may support other runtimes in the future).</li>
+          <li>Choose a hosting region.</li>
+          <li>Choose a local directory (where the skill will be saved on your computer).</li>
+          <li>Click <b>create</b>, the creation may take some minutes.</li>
+        </ol>
+      </li>
+      <li>Open the Alexa Skill Generator in your browser.</li>
+      <li>Upload your BPMN model.</li>
+      <li>Choose a wake word.</li>
+      <li>Enter your camunda rest endpoint url.</li>
+      <li>Click <b>create skill</b>.</li>
+      <li>A download will start, containing your skill files.</li>
+      <li>Unzip the files.</li>
+      <li>Copy all the files to your skill-folder on your computer (replace the existing files!).</li>
+      <li>Open a terminal in the folder of your skill and navigate to the <b>lambda</b> folder.</li>
+      <li>Run <b>npm install</b>. This will install some additional dependencies for your skill.</li>
+      <li>Stage all changes, commit and push them. Alternatively, You can also use the deployment section of the Alexa Skills Toolkit Plugin.</li>
+      <li>The deployment may take some time.</li>
+      <li>Now open the Alexa Developer console in your browser, select your created skill and go to the <b>test</b> section. Enable testing for the development stage.</li>
+      <li>Start interacting with your skill</li>
     </ol>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
