@@ -58,7 +58,7 @@
       <bpmn:outgoing>Flow_0eic01m</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_0a2m94r" name="Backen">
-      <bpmn:documentation>Die vorbeitete ${order} backen.</bpmn:documentation>
+      <bpmn:documentation>Die vorbereitete ${order} backen.</bpmn:documentation>
       <bpmn:incoming>Flow_0sxpgp2</bpmn:incoming>
       <bpmn:outgoing>Flow_15ro9bx</bpmn:outgoing>
     </bpmn:userTask>
