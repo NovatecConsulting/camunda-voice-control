@@ -17,14 +17,13 @@ public class PizzaDeliveryProcessInstanceCreator implements
 
   public PizzaDeliveryProcessInstanceCreator(RuntimeService runtimeService) {
     this.runtimeService = runtimeService;
-    orders.add("eine gro\u00dfe Pizza Salami");
-    //orders.add("3x Funghi");
-    //orders.add("1x Speziale");
+    orders.add("eine Pizza Salami");
   }
 
   @Override
   public void onApplicationEvent(ServerStartupEvent event) {
-    orders.forEach(order -> this.runtimeService.startProcessInstanceByKey("pizza_delivery",
-        Collections.singletonMap("order", order)));
+    /*orders.forEach(order -> this.runtimeService.startProcessInstanceByKey("Pizzabestellung",
+        Collections.singletonMap("order", order)));*/
+    this.runtimeService.startProcessInstanceByKey("Meetup_Process");
   }
 }
