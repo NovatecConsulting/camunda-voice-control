@@ -54,7 +54,7 @@ export default function createInteractionModelDe(invocationName) {
                 }
               ],
               "samples": [
-                "ich bin mir aufgabe {taskId} fertig",
+                "ich bin mit aufgabe {taskId} fertig",
                 "aufgabe {taskId} ist fertig",
                 "aufgabe ist fertig",
                 "ich bin fertig"

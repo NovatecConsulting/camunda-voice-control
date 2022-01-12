@@ -443,7 +443,7 @@ const CompletedTaskDetailsIntentHandler = {
                 const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/task/\${taskId}/variables\`);
                 const taskDetails = taskDetailsRequest.data;
                 const description = parseTaskDescription(assignedTask.description);
-                speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${description}. Was kann ich sonst noch f\u00fcr dich tun?\`;
+                speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${description} Was kann ich sonst noch f\u00fcr dich tun?\`;
             } catch(error) {
                 console.log(\`GET task details for \${taskId} failed \`, error);
             }
