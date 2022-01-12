@@ -20,24 +20,6 @@ All of these steps will take place within the kitchen. For the moment, we assume
 one pizza chef. And of course there is no computer with a display that the chef can use. So we place
 an Amazon Alexa in his kitchen!
 
-## Why use Camunda?
-
-## Why use Alexa?
-
-### What is the purpose of the skill?
-
-> The purpose is the guiding principle that your dialogs should align to that trains the AI. For example, the cake skill lets you order custom cakes delivered to your door from the comfort of home.
-
-- Interact with a user task (baking pizza)
-- Provide information to the user about 'what to do now'
-
-### What are the user's goals?
-
-> What do they get out of this experience? Goals help you identify your core dialogs. For example, users can order a pizza pie with preset options or customize a pie to their liking.
-
-- You can tell the system the state of your user task via voice
-- Process participants get updates of this former manual process -> Better User Experience
-
 ## Contribution
 
 ### Requirements
