@@ -1,22 +1,29 @@
 function getAttributesString(userTask) {
-    let attributesString = "attributes.vars = {\n"
+    let attributesString = "attributes.vars = {\n";
     userTask.variables.forEach(it => {
         attributesString = attributesString + `                "${it.varName}": "", // vars need to be initialized\n` 
-    })
-    attributesString = attributesString + "            }"
+    });
+    attributesString = attributesString + "            }";
     return attributesString;
 }
 
 function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
-    let completeTaskWithVars = ""
+    let completeTaskWithVars = "";
+    let variableCount = 0;
     for (let i = 0; i < userTasks.length; i++) {
         let first = true;
         if (userTasks[i].variables.length > 0 && first) {
-            completeTaskWithVars = completeTaskWithVars + `if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion}\`;\n        }`
+            completeTaskWithVars = completeTaskWithVars + `if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion}\`;\n        }`;
             first = false;
+            variableCount = variableCount + 1;
         } else if (userTasks[i].variables.length > 0 && i != 0) {
-            completeTaskWithVars = completeTaskWithVars + ` else if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion}\`;\n        }`
+            completeTaskWithVars = completeTaskWithVars + ` else if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion}\`;\n        }`;
+            variableCount = variableCount + 1;
         }
+    }
+
+    if(variableCount > 0) {
+        completeTaskWithVars = completeTaskWithVars + " else "
     }
 
     let questions = "const questions = {\n"
@@ -217,7 +224,7 @@ const CompletedCompleteTaskIntentHandler = {
             console.log(\`GET task for taskId \${taskId} failed\`, error)
         }
         attributes.taskId = taskId;
-        ${completeTaskWithVars} else if (assignedTask.assignee === 'ALEXA') {
+        ${completeTaskWithVars}if (assignedTask.assignee === 'ALEXA') {
             try {
                 const completeTask = await axios.post(\`\${camundaRestEndpoint}/task/\${taskId}/complete\`, {});
                 speakOutput = \`Aufgabe \${taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?\`
