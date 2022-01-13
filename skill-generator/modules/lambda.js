@@ -10,8 +10,8 @@ function getAttributesString(userTask) {
 function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
     let completeTaskWithVars = "";
     let variableCount = 0;
+    let first = true;
     for (let i = 0; i < userTasks.length; i++) {
-        let first = true;
         if (userTasks[i].variables.length > 0 && first) {
             completeTaskWithVars = completeTaskWithVars + `if (assignedTask.name === '${userTasks[i].taskName}') {\n            ${getAttributesString(userTasks[i])};\n            attributes.lastAskedVar = "${userTasks[i].variables[0].varName}";\n            speakOutput = \`${userTasks[i].variables[0].varQuestion}\`;\n        }`;
             first = false;
