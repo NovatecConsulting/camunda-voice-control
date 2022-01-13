@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1mp8si4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1mp8si4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:process id="Meetup_Process" name="Camunda Meetup" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1" name="Start">
-      <bpmn:outgoing>Flow_08ceztt</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_08ceztt" sourceRef="StartEvent_1" targetRef="Activity_0n52wql" />
     <bpmn:sequenceFlow id="Flow_0s2w2vi" sourceRef="Activity_0n52wql" targetRef="Activity_1vgivf8" />
-    <bpmn:endEvent id="Event_1xcgci4" name="Ende">
+    <bpmn:endEvent id="Event_1xcgci4" name="Vortrag erfolgreich durchgeführt">
       <bpmn:incoming>Flow_17v7zbm</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_17v7zbm" sourceRef="Activity_1vgivf8" targetRef="Event_1xcgci4" />
@@ -20,31 +17,32 @@
       <bpmn:incoming>Flow_0s2w2vi</bpmn:incoming>
       <bpmn:outgoing>Flow_17v7zbm</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:startEvent id="StartEvent_1" name="25.1.2022&#10;17:30">
+      <bpmn:outgoing>Flow_08ceztt</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_12993f3">
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">2022-01-25T17:30:00+01:00</bpmn:timeDate>
+      </bpmn:timerEventDefinition>
+    </bpmn:startEvent>
   </bpmn:process>
+  <bpmn:message id="Message_02y216z" name="Message_0286hs7" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Meetup_Process">
-      <bpmndi:BPMNEdge id="Flow_08ceztt_di" bpmnElement="Flow_08ceztt">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
+      <bpmndi:BPMNEdge id="Flow_17v7zbm_di" bpmnElement="Flow_17v7zbm">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0s2w2vi_di" bpmnElement="Flow_0s2w2vi">
         <di:waypoint x="370" y="117" />
         <di:waypoint x="430" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_17v7zbm_di" bpmnElement="Flow_17v7zbm">
-        <di:waypoint x="530" y="117" />
-        <di:waypoint x="592" y="117" />
+      <bpmndi:BPMNEdge id="Flow_08ceztt_di" bpmnElement="Flow_08ceztt">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="99" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="185" y="142" width="25" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1xcgci4_di" bpmnElement="Event_1xcgci4">
         <dc:Bounds x="592" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="598" y="142" width="26" height="14" />
+          <dc:Bounds x="580" y="142" width="63" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_192dagm_di" bpmnElement="Activity_0n52wql">
@@ -52,6 +50,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1mkr1v7_di" bpmnElement="Activity_1vgivf8">
         <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_108kl28_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="174" y="142" width="50" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

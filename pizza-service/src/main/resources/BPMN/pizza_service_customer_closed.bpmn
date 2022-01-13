@@ -43,7 +43,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!burned}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_097rigr" sourceRef="Activity_0qib0wn" targetRef="Activity_0xt3y63" />
-    <bpmn:userTask id="Activity_0gg6c8g" name="Verpacken">
+    <bpmn:userTask id="Activity_0gg6c8g" name="Pizza verpacken">
       <bpmn:documentation>Du musst ${order} verpacken.</bpmn:documentation>
       <bpmn:extensionElements>
         <camunda:formData>
@@ -57,12 +57,12 @@
       <bpmn:incoming>Flow_15ro9bx</bpmn:incoming>
       <bpmn:outgoing>Flow_0eic01m</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0a2m94r" name="Backen">
+    <bpmn:userTask id="Activity_0a2m94r" name="Pizza backen">
       <bpmn:documentation>Du musst ${order} backen.</bpmn:documentation>
       <bpmn:incoming>Flow_0sxpgp2</bpmn:incoming>
       <bpmn:outgoing>Flow_15ro9bx</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0vguj78" name="Zubereiten">
+    <bpmn:userTask id="Activity_0vguj78" name="Pizza zubereiten">
       <bpmn:documentation>Du musst ${order} zubereiten.</bpmn:documentation>
       <bpmn:incoming>Flow_188zvto</bpmn:incoming>
       <bpmn:outgoing>Flow_0sxpgp2</bpmn:outgoing>
