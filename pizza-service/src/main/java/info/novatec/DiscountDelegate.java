@@ -14,6 +14,6 @@ public class DiscountDelegate implements JavaDelegate {
   @Override
   public void execute(DelegateExecution delegateExecution) {
     String order = (String) delegateExecution.getVariable("order");
-    log.info(String.format("10%% Discount for %s!", order));
+    log.info("10% Discount for {}!", order);
   }
 }

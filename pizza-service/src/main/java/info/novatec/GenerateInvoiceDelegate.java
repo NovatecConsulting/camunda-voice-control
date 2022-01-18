@@ -14,6 +14,6 @@ public class GenerateInvoiceDelegate implements JavaDelegate {
   @Override
   public void execute(DelegateExecution delegateExecution) {
     String order = (String) delegateExecution.getVariable("order");
-    log.info(String.format("Generating Recipe for %s!", order));
+    log.info("Generating Invoice for {}!", order);
   }
 }
