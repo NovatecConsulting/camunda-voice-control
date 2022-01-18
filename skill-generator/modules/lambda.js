@@ -99,13 +99,10 @@ const NewTaskIntentHandler = {
                 speakOutput = \`Aufgabe \${taskId}: \${task.name}. \${task.description}\`;
             }
             try {
-                // WHY DO I DO THIS
-                const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/task/\${taskId}/variables\`);
-                const taskDetails = taskDetailsRequest.data;
                 const description = parseTaskDescription(task.description);
                 speakOutput = \`Aufgabe \${taskId}: \${task.name}. \${description}\`;
             } catch(error) {
-                console.log(\`GET task details for \${taskId} failed \`, error);
+                console.log(\`parse task details for \${taskId} failed \`, error);
             }
             try {
                 const claimTask = await axios.post(\`\${camundaRestEndpoint}/task/\${taskId}/claim\`, {"userId": "ALEXA"});
@@ -447,12 +444,10 @@ const CompletedTaskDetailsIntentHandler = {
                 speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${assignedTask.description}\`;
             }
             try {
-                const taskDetailsRequest = await axios.get(\`\${camundaRestEndpoint}/task/\${taskId}/variables\`);
-                const taskDetails = taskDetailsRequest.data;
                 const description = parseTaskDescription(assignedTask.description);
                 speakOutput = \`Aufgabe \${taskId}: \${assignedTask.name}. \${description} Was kann ich sonst noch f\u00fcr dich tun?\`;
             } catch(error) {
-                console.log(\`GET task details for \${taskId} failed \`, error);
+                console.log(\`parse task details for \${taskId} failed \`, error);
             }
         }
         handlerInput.attributesManager.setSessionAttributes(attributes);
