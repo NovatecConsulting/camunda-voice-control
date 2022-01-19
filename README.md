@@ -4,6 +4,22 @@ An integration of Amazon Alexa and [Camunda BPM Platform](https://github.com/cam
 
 I use Camunda BPM Platform integrated in Micronaut ([micronaut-camunda-bpm](https://github.com/camunda-community-hub/micronaut-camunda-bpm)).
 
+## Introduction / Motivation
+
+The following image shows a pizza delivery service process. I took it from the book of Rücker &
+Freund.
+![The pizza service process](BPMN/PNG/full_process_overview_pizza_service.png "The pizza service process")
+> Source: Replicated from Page 98, Rücker, B., & Freund, J. (2019). Praxishandbuch BPMN 2.0: Mit Einführung in DMN. Carl Hanser Verlag GmbH Co KG.
+
+However, we are only looking on the "service view" of the process. So we collapse the customer pool.
+Also, we split the task "Bake pizza" in three different tasks and add a gateway which gives a
+discount if the pizza got a bit burned.  
+![The service view](BPMN/PNG/pizza_service_customer_closed.png "The service view")
+
+All of these steps will take place within the kitchen. For the moment, we assume that there is only
+one pizza chef. And of course there is no computer with a display that the chef can use. So we place
+an Amazon Alexa in his kitchen and use the Skill Generator to create an Alexa Skill based on the above BPMN model.
+
 ## Requirements
 
 - Git
@@ -24,22 +40,6 @@ I use Camunda BPM Platform integrated in Micronaut ([micronaut-camunda-bpm](http
 - Start the skil-generator with `npm run dev` and open it at `http://localhost:3000` in your browser.
 - Create yourself an alexa developer account [here](https://developer.amazon.com/en-US/alexa/alexa-skills-kit#). (You can also use your amazon account. If you own an alexa device, your skills will automatically be available on your device).
 - Everything is ready to go. Create a process modell, run it through the skill-generator and follow its instructions for deployment. Enjoy!
-
-## Introduction / Motivation
-
-The following image shows a pizza delivery service process. I took it from the book of Rücker &
-Freund.
-![The pizza service process](BPMN/PNG/full_process_overview_pizza_service.png "The pizza service process")
-> Source: Replicated from Page 98, Rücker, B., & Freund, J. (2019). Praxishandbuch BPMN 2.0: Mit Einführung in DMN. Carl Hanser Verlag GmbH Co KG.
-
-However, we are only looking on the "service view" of the process. So we collapse the customer pool.
-Also, we split the task "Bake pizza" in three different tasks and add a gateway which gives a
-discount if the pizza got a bit burned.  
-![The service view](BPMN/PNG/pizza_service_customer_closed.png "The service view")
-
-All of these steps will take place within the kitchen. For the moment, we assume that there is only
-one pizza chef. And of course there is no computer with a display that the chef can use. So we place
-an Amazon Alexa in his kitchen!
 
 ## Contribution
 
