@@ -7,14 +7,11 @@ I use Camunda BPM Platform integrated in Micronaut ([micronaut-camunda-bpm](http
 ## Introduction / Motivation
 
 The following image shows a pizza delivery service process. I took it from the book of Rücker &
-Freund.
-![The pizza service process](BPMN/PNG/full_process_overview_pizza_service.png "The pizza service process")
-> Source: Replicated from Page 98, Rücker, B., & Freund, J. (2019). Praxishandbuch BPMN 2.0: Mit Einführung in DMN. Carl Hanser Verlag GmbH Co KG.
-
-However, we are only looking on the "service view" of the process. So we collapse the customer pool.
-Also, we split the task "Bake pizza" in three different tasks and add a gateway which gives a
+Freund. However, we are only looking on the "service view" of the process. So we collapse the customer pool.
+Also, we split the task "Bake pizza" in two different tasks and add a gateway which gives a
 discount if the pizza got a bit burned.  
-![The service view](BPMN/PNG/pizza_service_customer_closed.png "The service view")
+![The service view](BPMN_PNG/pizza-service.png "The service view")
+> Source: Replicated from Page 98, Rücker, B., & Freund, J. (2019). Praxishandbuch BPMN 2.0: Mit Einführung in DMN. Carl Hanser Verlag GmbH Co KG.
 
 All of these steps will take place within the kitchen. For the moment, we assume that there is only
 one pizza chef. And of course there is no computer with a display that the chef can use. So we place
