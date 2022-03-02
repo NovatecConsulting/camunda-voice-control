@@ -5,6 +5,7 @@ import { createLambdaNodeJS, lambdaNodeJSPackageJson } from './modules/lambda.js
 
 let camundaRestEndpoint;
 let invocationName;
+let language;
 let fileList;
 let userTasks = [];
 
@@ -47,6 +48,7 @@ function generateZip() {
 
   camundaRestEndpoint = document.getElementById("camundaRestEndpoint").value;
   invocationName = document.getElementById("invocationName").value;
+  language = document.getElementById("selectLanguage").value;
 
   const invocationNameSplit = invocationName.split(" ");
   if (invocationNameSplit.length !== 2) {
@@ -71,4 +73,8 @@ fileSelector.addEventListener('change', (event) => {
     readFile(fileList[0]);
 });
 
-createButton.addEventListener("click", () => generateZip());
+// createButton.addEventListener("click", () => generateZip());
+createButton.addEventListener("click", () => {
+  console.log(document.getElementById("selectLanguage").value);
+});
+
