@@ -1,6 +1,22 @@
 import lambdaNodeJSgitignore from './modules/gitignore.js'
 import createInteractionModelDe from './modules/interactionModel.js'
 import { createLambdaNodeJS, lambdaNodeJSPackageJson } from './modules/lambda.js'
+import en from './locales/en.json'
+import de from './locales/de.json'
+import i18next from "i18next";
+
+i18next.init({
+  lng: 'en',
+  debug: true,
+  resources: {
+    en,
+    de
+  }
+})
+
+console.log(i18next.t('key'))
+i18next.changeLanguage('de')
+console.log(i18next.t('key'))
 
 
 let camundaRestEndpoint;
@@ -73,8 +89,8 @@ fileSelector.addEventListener('change', (event) => {
     readFile(fileList[0]);
 });
 
-// createButton.addEventListener("click", () => generateZip());
-createButton.addEventListener("click", () => {
+createButton.addEventListener("click", () => generateZip());
+/*createButton.addEventListener("click", () => {
   console.log(document.getElementById("selectLanguage").value);
 });
-
+*/

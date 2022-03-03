@@ -4,7 +4,9 @@
     "@commitlint/config-conventional": "^13.2.0",
     "husky": "^7.0.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "i18next": "^21.6.13"
+  },
   "scripts": {
     "ngrok": ".\\ngrok\\ngrok.exe http 8080"
   }
