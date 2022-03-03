@@ -1,6 +1,7 @@
 import lambdaNodeJSgitignore from './modules/gitignore.js'
 import createInteractionModelDe from './modules/interactionModel.js'
 import { createLambdaNodeJS, lambdaNodeJSPackageJson } from './modules/lambda.js'
+import i18n from 'i18n'
 
 
 let camundaRestEndpoint;

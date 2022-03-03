@@ -1,4 +1,5 @@
-export default function createInteractionModelDe(invocationName) {
+export default function createInteractionModelDe(invocationName, language) {
+    // TODO if DE return german, if EN return english
     return `{
       "interactionModel": {
         "languageModel": {
