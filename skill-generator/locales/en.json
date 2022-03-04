@@ -1,5 +1,19 @@
 {
   "translation": {
-    "key": "Hello World!"
+    "newTaskSamples": {
+      "1": "what do I have to do",
+      "2": "give me a task"
+    },
+    "completeTaskSamples": {
+      "1": "I completed task {taskId}",
+      "2": "task {taskId} is completed"
+    },
+    "taskDetailsSamples": {
+      "1": "what is task {taskId}",
+      "2": "give me some details about task {taskId}",
+      "3": "what do I have to do",
+      "5": "what is my task"
+    },
+    "taskUnclearPrompt": "what task do you mean?"
   }
 }

@@ -1,5 +1,5 @@
 import lambdaNodeJSgitignore from './modules/gitignore.js'
-import createInteractionModelDe from './modules/interactionModel.js'
+import createInteractionModel from './modules/interactionModel.js'
 import { createLambdaNodeJS, lambdaNodeJSPackageJson } from './modules/lambda.js'
 import en from './locales/en.json'
 import de from './locales/de.json'
@@ -13,11 +13,6 @@ i18next.init({
     de
   }
 })
-
-console.log(i18next.t('key'))
-i18next.changeLanguage('de')
-console.log(i18next.t('key'))
-
 
 let camundaRestEndpoint;
 let invocationName;
@@ -65,6 +60,7 @@ function generateZip() {
   camundaRestEndpoint = document.getElementById("camundaRestEndpoint").value;
   invocationName = document.getElementById("invocationName").value;
   language = document.getElementById("selectLanguage").value;
+  i18next.changeLanguage(language);
 
   const invocationNameSplit = invocationName.split(" ");
   if (invocationNameSplit.length !== 2) {
@@ -73,7 +69,7 @@ function generateZip() {
     const zip = new JSZip();
     zip.file(".gitignore", lambdaNodeJSgitignore);
     zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint, userTasks)).file("package.json", lambdaNodeJSPackageJson);
-    zip.folder("skill-package").folder("interactionModels").folder("custom").file("de-DE.json", createInteractionModelDe(invocationName));
+    zip.folder("skill-package").folder("interactionModels").folder("custom").file(`${language}-${language.toUpperCase()}.json`, createInteractionModel(invocationName));
     
     zip.generateAsync({ type: "blob" }).then(function (blob) {
       saveAs(blob, "camunda-alexa-skill.zip");
@@ -92,5 +88,6 @@ fileSelector.addEventListener('change', (event) => {
 createButton.addEventListener("click", () => generateZip());
 /*createButton.addEventListener("click", () => {
   console.log(document.getElementById("selectLanguage").value);
+  console.log(createInteractionModel("test"));
 });
 */

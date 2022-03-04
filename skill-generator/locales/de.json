@@ -1,5 +1,23 @@
 {
   "translation": {
-    "key": "Hallo Welt!"
+    "newTaskSamples": {
+      "1": "was muss ich machen",
+      "2": "was kann ich tun",
+      "3": "gib mir eine aufgabe"
+    },
+    "completeTaskSamples": {
+      "1": "ich bin mit aufgabe {taskId} fertig",
+      "2": "aufgabe {taskId} ist fertig",
+      "3": "aufgabe ist fertig",
+      "4": "ich bin fertig"
+    },
+    "taskDetailsSamples": {
+      "1": "was war nochmal aufgabe {taskId}",
+      "2": "gib mir details zu aufgabe {taskId}",
+      "3": "was muss ich gerade nochmal tun",
+      "4": "was muss ich gerade tun",
+      "5": "was ist nochmal meine aufgabe"
+    },
+    "taskUnclearPrompt": "welche aufgabe meinst du?"
   }
 }

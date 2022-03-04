@@ -1,0 +1,119 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "{{invocationName}}",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "NewTaskIntent",
+          "slots": [],
+          "samples": []
+        },
+        {
+          "name": "TaskDetailsIntent",
+          "slots": [
+            {
+              "name": "taskId",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": []
+        },
+        {
+          "name": "CompleteTaskIntent",
+          "slots": [
+            {
+              "name": "taskId",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "CompleteTaskIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "taskId",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.539063591107.512340378493"
+              }
+            }
+          ],
+          "delegationStrategy": "SKILL_RESPONSE"
+        },
+        {
+          "name": "TaskDetailsIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "taskId",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1389421313355.324603669485"
+              }
+            }
+          ],
+          "delegationStrategy": "SKILL_RESPONSE"
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.539063591107.512340378493",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "{{TaskUnclearQuestion}}"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1389421313355.324603669485",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "{{TaskUnclearQuestion}}"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "1"
+}
