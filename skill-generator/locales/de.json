@@ -18,6 +18,53 @@
       "4": "was muss ich gerade tun",
       "5": "was ist nochmal meine aufgabe"
     },
-    "taskUnclearPrompt": "welche aufgabe meinst du?"
+    "taskUnclearPrompt": "welche aufgabe meinst du?",
+    "LaunchRequestHandler": {
+      "speakOutput": "Hallo, du kannst Aufgaben anfordern und abschlie\\u00dfen. Was m\\u00f6chtest du tun?"
+    },
+    "NewTaskIntentHandler": {
+      "noNewTaskSpeakOutput": "Es gibt gerade keine offenen Aufgaben.",
+      "task": "Aufgabe"
+    },
+    "IdNotGivenCompleteTaskIntentHandler": {
+      "noAssignedTask": "Du musst gerade keine Aufgabe bearbeiten.",
+      "chooseTask": "Meinst du Aufgabe",
+      "or": "oder"
+    },
+    "CompletedCompleteTaskIntentHandler": {
+      "unknownTask": "Diese Aufgabe kenne ich nicht.",
+      "completedTask": "Aufgabe ${taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?",
+      "error": "Da ist etwas schief gegangen."
+    },
+    "YesAfterCompleteTaskIntentHandler": {
+      "unknownTask": "Diese Aufgabe kenne ich nicht.",
+      "completedTask": "Aufgabe ${attributes.taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?"
+    },
+    "NoAfterCompleteTaskIntentHandler": {
+      "unknownTask": "Diese Aufgabe kenne ich nicht.",
+      "completedTask": "Aufgabe ${attributes.taskId} abgeschlossen. Was m\u00f6chtest du als n\u00e4chstes tun?"
+    },
+    "IdNotGivenTaskDetailsIntentHandler": {
+      "noAssignedTask": "Du musst gerade keine Aufgabe bearbeiten.",
+      "chooseTask": "Meinst du Aufgabe",
+      "or": "oder"
+    },
+    "CompletedTaskDetailsIntentHandler": {
+      "unknownTask": "Diese Aufgabe kenne ich nicht.",
+      "task": "Aufgabe",
+      "fullTaskDetails": "Aufgabe ${taskId}: ${assignedTask.name}. ${description} Was kann ich sonst noch f\u00fcr dich tun?"
+    },
+    "HelpIntentHandler": {
+      "speakOutput": "Ich kann dir eine Aufgabe geben, Du kannst deine Aufgaben abschlie\u00dfen oder dir Details geben lassen. Was m\u00f6chtest du tun?"
+    },
+    "CancelAndStopIntentHandler": {
+      "speakOutput": "Tsch\u00fcss!"
+    },
+    "FallbackIntentHandler": {
+      "speakOutput": "Sorry, Da ist etwas schief gegangen. Probiere es bitte nochmal."
+    },
+    "ErrorHandler": {
+      "speakOutput": "Sorry, Ein Fehler ist aufgetreten. Bitte nochmal versuchen."
+    }
   }
 }

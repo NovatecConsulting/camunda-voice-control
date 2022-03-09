@@ -14,6 +14,53 @@
       "3": "what do I have to do",
       "5": "what is my task"
     },
-    "taskUnclearPrompt": "what task do you mean?"
+    "taskUnclearPrompt": "what task do you mean?",
+    "LaunchRequestHandler": {
+      "speakOutput": "Hello, you can get and complete tasks. What do you want to do?"
+    },
+    "NewTaskIntentHandler": {
+      "noNewTaskSpeakOutput": "There are no open tasks.",
+      "task": "Task"
+    },
+    "IdNotGivenCompleteTaskIntentHandler": {
+      "noAssignedTask": "No tasks are assigend to you.",
+      "chooseTask": "Do you mean task",
+      "or": "or"
+    },
+    "CompletedCompleteTaskIntentHandler": {
+      "unknownTask": "I don't know this task.",
+      "completedTask": "Completed task ${taskId}. What do you want to do next?",
+      "error": "Something went wrong."
+    },
+    "YesAfterCompleteTaskIntentHandler": {
+      "unknownTask": "I don't know this task.",
+      "completedTask": "Completed task ${attributes.taskId}. What do you want to do next?"
+    },
+    "NoAfterCompleteTaskIntentHandler": {
+      "unknownTask": "I don't know this task.",
+      "completedTask": "Completed task ${attributes.taskId}. What do you want to do next?"
+    },
+    "IdNotGivenTaskDetailsIntentHandler": {
+      "noAssignedTask": "No tasks are assigned to you.",
+      "chooseTask": "Do you mean task",
+      "or": "or"
+    },
+    "CompletedTaskDetailsIntentHandler": {
+      "unknownTask": "I don't know this task.",
+      "task": "Task",
+      "fullTaskDetails": "Task ${taskId}: ${assignedTask.name}. ${description} What else can I do for you?"
+    },
+    "HelpIntentHandler": {
+      "speakOutput": "You can claim, complete or get details about tasks. What do you want to do?"
+    },
+    "CancelAndStopIntentHandler": {
+      "speakOutput": "Bye!"
+    },
+    "FallbackIntentHandler": {
+      "speakOutput": "Sorry, something went wrong. Please try again."
+    },
+    "ErrorHandler": {
+      "speakOutput": "Sorry, an error occured. Please try again."
+    }
   }
 }

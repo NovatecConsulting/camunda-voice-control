@@ -63,7 +63,7 @@ function generateZip() {
   i18next.changeLanguage(language);
 
   const invocationNameSplit = invocationName.split(" ");
-  if (invocationNameSplit.length !== 2) {
+  if (language == 'en' && invocationNameSplit.length !== 2) {
     alert("Invocation Name does not fulfill requirements. See https://developer.amazon.com/en-US/docs/alexa/custom-skills/choose-the-invocation-name-for-a-custom-skill.html#cert-invocation-name-req");
   } else {
     const zip = new JSZip();
@@ -86,8 +86,4 @@ fileSelector.addEventListener('change', (event) => {
 });
 
 createButton.addEventListener("click", () => generateZip());
-/*createButton.addEventListener("click", () => {
-  console.log(document.getElementById("selectLanguage").value);
-  console.log(createInteractionModel("test"));
-});
-*/
+
