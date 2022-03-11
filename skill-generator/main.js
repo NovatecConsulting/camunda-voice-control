@@ -69,7 +69,12 @@ function generateZip() {
     const zip = new JSZip();
     zip.file(".gitignore", lambdaNodeJSgitignore);
     zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint, userTasks)).file("package.json", lambdaNodeJSPackageJson);
-    zip.folder("skill-package").folder("interactionModels").folder("custom").file(`${language}-${language.toUpperCase()}.json`, createInteractionModel(invocationName));
+    if (language == 'en') {
+      zip.folder("skill-package").folder("interactionModels").folder("custom").file(`en-US.json`, createInteractionModel(invocationName));
+    } else if (language == 'de') {
+      zip.folder("skill-package").folder("interactionModels").folder("custom").file(`de-DE.json`, createInteractionModel(invocationName));
+    }
+
     
     zip.generateAsync({ type: "blob" }).then(function (blob) {
       saveAs(blob, "camunda-alexa-skill.zip");
