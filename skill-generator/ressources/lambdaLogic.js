@@ -447,7 +447,7 @@ const CancelAndStopIntentHandler = {
     handle(handlerInput) {
         const attributes = handlerInput.attributesManager.getSessionAttributes();
         attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = `{CancelAndStopIntentHandler.speakOutput}}`;
+        const speakOutput = `{{CancelAndStopIntentHandler.speakOutput}}`;
         handlerInput.attributesManager.setSessionAttributes(attributes);
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -503,7 +503,7 @@ const ErrorHandler = {
     handle(handlerInput, error) {
         const attributes = handlerInput.attributesManager.getSessionAttributes();
         attributes.lastIntent = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = `{ErrorHandler.speakOutput}}`;
+        const speakOutput = `{{ErrorHandler.speakOutput}}`;
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
         handlerInput.attributesManager.setSessionAttributes(attributes);
         return handlerInput.responseBuilder
