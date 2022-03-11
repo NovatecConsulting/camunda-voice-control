@@ -11,8 +11,7 @@
     "taskDetailsSamples": {
       "1": "what is task {taskId}",
       "2": "give me some details about task {taskId}",
-      "3": "what do I have to do",
-      "5": "what is my task"
+      "3": "what is my task"
     },
     "taskUnclearPrompt": "what task do you mean?",
     "LaunchRequestHandler": {
