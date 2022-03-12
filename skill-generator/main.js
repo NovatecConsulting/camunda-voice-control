@@ -1,6 +1,6 @@
-import lambdaNodeJSgitignore from './modules/gitignore.js'
+import createGitignore from './modules/gitignore.js'
 import createInteractionModel from './modules/interactionModel.js'
-import {createLambdaNodeJS, createPackageJson, lambdaNodeJSPackageJson} from './modules/lambda.js'
+import {createLambdaNodeJS, createPackageJson } from './modules/lambda.js'
 import en from './locales/en.json'
 import de from './locales/de.json'
 import i18next from "i18next";
@@ -67,7 +67,7 @@ function generateZip() {
     alert("Invocation Name does not fulfill requirements. See https://developer.amazon.com/en-US/docs/alexa/custom-skills/choose-the-invocation-name-for-a-custom-skill.html#cert-invocation-name-req");
   } else {
     const zip = new JSZip();
-    zip.file(".gitignore", lambdaNodeJSgitignore);
+    zip.file(".gitignore", createGitignore());
     zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint, userTasks)).file("package.json", createPackageJson());
     if (language == 'en') {
       zip.folder("skill-package").folder("interactionModels").folder("custom").file(`en-US.json`, createInteractionModel(invocationName));
