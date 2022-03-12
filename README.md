@@ -29,14 +29,14 @@ an Amazon Alexa in his kitchen and use the Skill Generator to create an Alexa Sk
 - Clone the repository with `git clone https://github.com/NovatecConsulting/camunda-voice-control.git`.
 - Open a terminal in the cloned folder and enter `npm install`.
 - Open the subfolder `pizza-service` with `IntelliJ`. The gradle build process should automatically start. It may take a while to download all dependencies.
-- After a successfull build, start the application within IntelliJ. You should be able to open the camunda webapps in your browser on `http://localhost:8080`. Do that and log in with `username:admin` and `password:admin`.
+- After a successful build, start the application within IntelliJ. You should be able to open the camunda webapps in your browser on `http://localhost:8080`. Do that and log in with `username:admin` and `password:admin`.
 - Create an account at [ngrok](https://ngrok.com/) and download the software. Unzip and place it within the root folder of the cloned project. Also, rename the folder to `ngrok`.
-- Add the ngrok authtoken (see instruction on their website).
+- Add the ngrok auth-token (see instruction on their website).
 - Open a terminal there, run `npm run ngrok`. The service should provide you a `http` and a `https` endpoint. Open the `https` endpoint in a browser. You should see the camunda welcome screen.
 - Open a terminal in the subfolder `skill-generator` and enter `npm install`.
-- Start the skil-generator with `npm run dev` and open it at `http://localhost:3000` in your browser.
+- Start the skill-generator with `npm run dev` and open it at `http://localhost:3000` in your browser.
 - Create yourself an alexa developer account [here](https://developer.amazon.com/en-US/alexa/alexa-skills-kit#). (You can also use your amazon account. If you own an alexa device, your skills will automatically be available on your device).
-- Everything is ready to go. Create a process modell, run it through the skill-generator and follow its instructions for deployment. Enjoy!
+- Everything is ready to go. Create a process model, run it through the skill-generator and follow its instructions for deployment. Enjoy!
 
 ## Contribution
 

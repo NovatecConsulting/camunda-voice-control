@@ -36,7 +36,7 @@ async function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
     })
     questions = questions + "}"
 
-    let nodeJsLogic = await fetch('ressources/templateLambdaLogic.js').then(data => data.text());
+    let nodeJsLogic = await fetch('resources/templateLambdaLogic.js').then(data => data.text());
     nodeJsLogic = nodeJsLogic.replace('{{questions}}', questions);
     nodeJsLogic = nodeJsLogic.replace('{{camundaRestEndpoint}}', camundaRestEndpoint);
     nodeJsLogic = nodeJsLogic.replace('{{completeTaskWithVars}}', completeTaskWithVars);
@@ -53,7 +53,7 @@ async function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
 }
 
 async function createPackageJson () {
-    return await fetch('ressources/templatePackage.json').then(data => data.text());
+    return await fetch('resources/templatePackage.json').then(data => data.text());
 }
 
 export { createLambdaNodeJS, createPackageJson }

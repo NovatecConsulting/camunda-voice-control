@@ -1,5 +1,0 @@
-function readFile() {
-
-}
-
-export { readFile}

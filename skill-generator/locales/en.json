@@ -22,7 +22,7 @@
       "task": "Task"
     },
     "IdNotGivenCompleteTaskIntentHandler": {
-      "noAssignedTask": "No tasks are assigend to you.",
+      "noAssignedTask": "No tasks are assigned to you.",
       "chooseTask": "Do you mean task",
       "or": "or"
     },
@@ -59,7 +59,7 @@
       "speakOutput": "Sorry, something went wrong. Please try again."
     },
     "ErrorHandler": {
-      "speakOutput": "Sorry, an error occured. Please try again."
+      "speakOutput": "Sorry, an error occurred. Please try again."
     }
   }
 }

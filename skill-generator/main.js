@@ -5,7 +5,6 @@ import en from './locales/en.json'
 import de from './locales/de.json'
 import i18next from "i18next";
 
-
 i18next.init({
   lng: 'en',
   debug: true,
@@ -13,7 +12,7 @@ i18next.init({
     en,
     de
   }
-})
+}).then( () => console.debug('i18next initialized'))
 
 let camundaRestEndpoint;
 let invocationName;
@@ -64,7 +63,6 @@ async function generateZip() {
   await i18next.changeLanguage(language);
 
   const invocationNameSplit = invocationName.split(" ");
-  console.log(typeof language)
 
   // FIX have to use .normalize() so that I can use '===' for the comparison
   if (language.normalize() === 'en' && invocationNameSplit.length !== 2) {

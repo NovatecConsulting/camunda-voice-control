@@ -122,7 +122,7 @@ const IdNotGivenCompleteTaskIntentHandler = {
             const fetchAssignedTasks = await axios.get(`${camundaRestEndpoint}/task?assignee=ALEXA`);
             allAssignedTasks = fetchAssignedTasks.data;
         } catch(error) {
-            console.log('GET all to ALEXA assigend tasks failed ', error);
+            console.log('GET all to ALEXA assigned tasks failed ', error);
         }
         
         if(!taskIdSlot.value && allAssignedTasks.length === 1) {
@@ -339,7 +339,7 @@ const IdNotGivenTaskDetailsIntentHandler = {
             const fetchAssignedTasks = await axios.get(`${camundaRestEndpoint}/task?assignee=ALEXA`);
             allAssignedTasks = fetchAssignedTasks.data;
         } catch(error) {
-            console.log('GET all to ALEXA assigend tasks failed ', error);
+            console.log('GET all to ALEXA assigned tasks failed ', error);
         }
         
         if(!taskIdSlot.value && allAssignedTasks.length === 1) {
@@ -457,7 +457,7 @@ const CancelAndStopIntentHandler = {
 /* *
     * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
     * It must also be defined in the language model (if the locale supports it)
-    * This handler can be safely added but will be ingnored in locales that do not support it yet 
+    * This handler can be safely added but will be ignored in locales that do not support it yet
     * */
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
