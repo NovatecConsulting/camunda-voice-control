@@ -2,7 +2,7 @@ import i18next from "i18next";
 
 export default async function createInteractionModel(invocationName) {
 
-    let model = await fetch('../ressources/interactionModel.json').then(response => response.json());
+    let model = await fetch('../ressources/templateInteractionModel.json').then(response => response.json());
     const translation = await fetch(`../locales/${i18next.language}.json`).then(response => response.json());
 
     model.interactionModel.languageModel.invocationName = invocationName

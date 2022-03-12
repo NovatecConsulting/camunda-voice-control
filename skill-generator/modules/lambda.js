@@ -36,7 +36,7 @@ async function createLambdaNodeJS(camundaRestEndpoint, userTasks) {
     })
     questions = questions + "}"
 
-    let nodeJsLogic = await fetch('ressources/lambdaLogic.js').then(data => data.text());
+    let nodeJsLogic = await fetch('ressources/templateLambdaLogic.js').then(data => data.text());
     nodeJsLogic = nodeJsLogic.replace('{{questions}}', questions);
     nodeJsLogic = nodeJsLogic.replace('{{camundaRestEndpoint}}', camundaRestEndpoint);
     nodeJsLogic = nodeJsLogic.replace('{{completeTaskWithVars}}', completeTaskWithVars);
