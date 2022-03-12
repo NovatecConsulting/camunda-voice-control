@@ -22,37 +22,38 @@ let userTasks = [];
 
 function readFile(file) {
 
-  const reader = new FileReader();
-  reader.addEventListener('load', (event) => {
+  const fileReader = new FileReader();
+  fileReader.addEventListener('load', (event) => {
     parseXML(event.target.result);
   });
-  reader.readAsText(file);
+  fileReader.readAsText(file);
 }
 
 function parseXML(xmlAsString) {
-  const parser = new DOMParser();
-  const xmlDoc = parser.parseFromString(xmlAsString, "text/xml");
+  const domParser = new DOMParser();
+  const xmlDoc = domParser.parseFromString(xmlAsString, "text/xml");
 
-  const xmlUserTasks = xmlDoc.getElementsByTagName("bpmn:userTask");
-  
-  for (let i = 0; i < xmlUserTasks.length; i++) {
+  const xmlUserTasks = Array.from(xmlDoc.getElementsByTagName("bpmn:userTask"));
+
+  xmlUserTasks.forEach( xmlUserTask => {
     let userTask = {};
-    userTask.taskName = xmlUserTasks[i].getAttribute("name");
+    userTask.taskName = xmlUserTask.getAttribute("name");
 
-    const xmlUserTaskVariables = xmlUserTasks[i].getElementsByTagName("camunda:formField");
+    const xmlUserTaskVariables = Array.from(xmlUserTask.getElementsByTagName("camunda:formField"));
 
-    let userTaskVariables = []
-    for (let ii = 0; ii < xmlUserTaskVariables.length; ii++) {
+    let userTaskVariables = [];
+    xmlUserTaskVariables.forEach( xmlUserTaskVariable => {
       let variable = {};
-      variable.varName = xmlUserTaskVariables[ii].getAttribute("id");
-      variable.varType = xmlUserTaskVariables[ii].getAttribute("type");
-      const prop = xmlUserTaskVariables[ii].getElementsByTagName("camunda:property")[0];
-      variable.varQuestion = prop !== undefined ? prop.getAttribute("value") : alert(`${variable.varName} misses property Q1`);
+      variable.varName = xmlUserTaskVariable.getAttribute("id");
+      variable.varType = xmlUserTaskVariable.getAttribute("type");
+      const camundaProperties = Array.from(xmlUserTaskVariable.getElementsByTagName("camunda:property"));
+      const q1 = camundaProperties.find(element => element.id.toUpperCase().normalize() === "Q1");
+      variable.varQuestion = q1 !== undefined ? q1.getAttribute("value") : alert(`${variable.varName} misses property Q1`);
       userTaskVariables.push(variable);
-    }
+    });
     userTask.variables = userTaskVariables;
     userTasks.push(userTask);
-  }
+  });
 }
 
 async function generateZip() {
