@@ -5,6 +5,7 @@ import en from './locales/en.json'
 import de from './locales/de.json'
 import i18next from "i18next";
 
+
 i18next.init({
   lng: 'en',
   debug: true,
@@ -55,26 +56,28 @@ function parseXML(xmlAsString) {
   }
 }
 
-function generateZip() {
+async function generateZip() {
 
   camundaRestEndpoint = document.getElementById("camundaRestEndpoint").value;
   invocationName = document.getElementById("invocationName").value;
   language = document.getElementById("selectLanguage").value;
-  i18next.changeLanguage(language);
+  await i18next.changeLanguage(language);
 
   const invocationNameSplit = invocationName.split(" ");
-  if (language == 'en' && invocationNameSplit.length !== 2) {
+  console.log(typeof language)
+
+  // FIX have to use .normalize() so that I can use '===' for the comparison
+  if (language.normalize() === 'en' && invocationNameSplit.length !== 2) {
     alert("Invocation Name does not fulfill requirements. See https://developer.amazon.com/en-US/docs/alexa/custom-skills/choose-the-invocation-name-for-a-custom-skill.html#cert-invocation-name-req");
   } else {
     const zip = new JSZip();
     zip.file(".gitignore", createGitignore());
     zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint, userTasks)).file("package.json", createPackageJson());
-    if (language == 'en') {
+    if (language.normalize() === 'en') {
       zip.folder("skill-package").folder("interactionModels").folder("custom").file(`en-US.json`, createInteractionModel(invocationName));
-    } else if (language == 'de') {
+    } else if (language.normalize() === 'de') {
       zip.folder("skill-package").folder("interactionModels").folder("custom").file(`de-DE.json`, createInteractionModel(invocationName));
     }
-
     
     zip.generateAsync({ type: "blob" }).then(function (blob) {
       saveAs(blob, "camunda-alexa-skill.zip");
@@ -91,4 +94,3 @@ fileSelector.addEventListener('change', (event) => {
 });
 
 createButton.addEventListener("click", () => generateZip());
-

@@ -11,7 +11,7 @@ function removeBracketsAndDollarsymbol(variable){
 
 function parseTaskDescription(taskDescription) {
     // takes e.g. "Du musst ${order} und ${task} bearbeiten" and extracts ${order} and ${task}
-    const camundaVariables = taskDescription.match(/\${\w+\}/g);
+    const camundaVariables = taskDescription.match(/\${\w+}/g);
 
     if (camundaVariables !== null) {
         camundaVariables.forEach(variable => {

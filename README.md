@@ -48,7 +48,7 @@ I use conventional [commit messages](https://github.com/conventional-changelog/c
 2. `npx husky install` // Active hooks
 3. `npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'` // Add hook
 
-Otherwise see [here](https://commitlint.js.org/#/guides-local-setup).
+Otherwise, see [here](https://commitlint.js.org/#/guides-local-setup).
 
 ### BPMN's to PNG
 
