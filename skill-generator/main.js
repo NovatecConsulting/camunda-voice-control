@@ -1,6 +1,6 @@
 import lambdaNodeJSgitignore from './modules/gitignore.js'
 import createInteractionModel from './modules/interactionModel.js'
-import { createLambdaNodeJS, lambdaNodeJSPackageJson } from './modules/lambda.js'
+import {createLambdaNodeJS, createPackageJson, lambdaNodeJSPackageJson} from './modules/lambda.js'
 import en from './locales/en.json'
 import de from './locales/de.json'
 import i18next from "i18next";
@@ -68,7 +68,7 @@ function generateZip() {
   } else {
     const zip = new JSZip();
     zip.file(".gitignore", lambdaNodeJSgitignore);
-    zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint, userTasks)).file("package.json", lambdaNodeJSPackageJson);
+    zip.folder("lambda").file("index.js", createLambdaNodeJS(camundaRestEndpoint, userTasks)).file("package.json", createPackageJson());
     if (language == 'en') {
       zip.folder("skill-package").folder("interactionModels").folder("custom").file(`en-US.json`, createInteractionModel(invocationName));
     } else if (language == 'de') {
