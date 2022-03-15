@@ -2,16 +2,40 @@
   "translation": {
     "newTaskSamples": {
       "1": "what do I have to do",
-      "2": "give me a task"
+      "2": "give me a task",
+      "3": "what can I do next",
+      "4": "what do I need to do",
+      "5": "what must I do",
+      "6": "what can I do",
+      "7": "what to do",
+      "8": "what needs to be done",
+      "9": "what is to do",
+      "10": "give me a new task",
+      "11": "assign me a task",
+      "12": "assign a task to me"
     },
     "completeTaskSamples": {
       "1": "I completed task {taskId}",
-      "2": "task {taskId} is completed"
+      "2": "task {taskId} is completed",
+      "3": "I completed my task",
+      "4": "I am done",
+      "5": "I am done with my task",
+      "6": "I completed the task",
+      "7": "I am finished",
+      "8": "I am finished with my task",
+      "9": "task completed",
+      "10": "task done",
+      "11": "job completed",
+      "12": "task {taskId} done",
+      "13": "task {taskId} completed"
+
     },
     "taskDetailsSamples": {
       "1": "what is task {taskId}",
       "2": "give me some details about task {taskId}",
-      "3": "what is my task"
+      "3": "what is my task",
+      "4": "what is my current task",
+      "5": "what again is my current task"
     },
     "taskUnclearPrompt": "what task do you mean?",
     "LaunchRequestHandler": {

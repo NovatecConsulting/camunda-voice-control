@@ -3,13 +3,18 @@
     "newTaskSamples": {
       "1": "was muss ich machen",
       "2": "was kann ich tun",
-      "3": "gib mir eine aufgabe"
+      "3": "gib mir eine aufgabe",
+      "4": "gib mir eine neue aufgabe",
+      "5": "was muss getan werden",
+      "6": "weise mir eine aufgabe zu"
     },
     "completeTaskSamples": {
       "1": "ich bin mit aufgabe {taskId} fertig",
       "2": "aufgabe {taskId} ist fertig",
       "3": "aufgabe ist fertig",
-      "4": "ich bin fertig"
+      "4": "ich bin fertig",
+      "5": "aufgabe ist erledigt",
+      "6": "ich habe aufgabe {taskId} erledigt"
     },
     "taskDetailsSamples": {
       "1": "was war nochmal aufgabe {taskId}",
