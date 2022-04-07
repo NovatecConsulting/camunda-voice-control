@@ -15,7 +15,7 @@ discount if the pizza got a bit burned.
 
 All of these steps will take place within the kitchen. For the moment, we assume that there is only
 one pizza chef. And of course there is no computer with a display that the chef can use. So we place
-an Amazon Alexa in his kitchen and use the Skill Generator to create an Alexa Skill based on the above BPMN model.
+an Amazon Alexa in his kitchen and use the Skill-Generator to create an Alexa Skill based on the above BPMN model.
 
 ## Requirements
 
@@ -34,9 +34,9 @@ an Amazon Alexa in his kitchen and use the Skill Generator to create an Alexa Sk
 - Add the ngrok auth-token (see instruction on their website).
 - Open a terminal there, run `npm run ngrok`. The service should provide you a `http` and a `https` endpoint. Open the `https` endpoint in a browser. You should see the camunda welcome screen.
 - Open a terminal in the subfolder `skill-generator` and enter `npm install`.
-- Start the skill-generator with `npm run dev` and open it at `http://localhost:3000` in your browser.
+- Start the Skill-Generator with `npm run dev` and open it at `http://localhost:3000` in your browser.
 - Create yourself an alexa developer account [here](https://developer.amazon.com/en-US/alexa/alexa-skills-kit#). (You can also use your amazon account. If you own an alexa device, your skills will automatically be available on your device).
-- Everything is ready to go. Create a process model, run it through the skill-generator and follow its instructions for deployment. Enjoy!
+- Everything is ready to go. Create a process model, run it through the Skill-Generator and follow its instructions for deployment. Enjoy!
 
 ## Contribution
 
