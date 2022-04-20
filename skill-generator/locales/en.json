@@ -28,14 +28,14 @@
       "11": "job completed",
       "12": "task {taskId} done",
       "13": "task {taskId} completed"
-
     },
     "taskDetailsSamples": {
       "1": "what is task {taskId}",
       "2": "give me some details about task {taskId}",
       "3": "what is my task",
       "4": "what is my current task",
-      "5": "what again is my current task"
+      "5": "what again is my current task",
+      "6": "give me the details about my task"
     },
     "taskUnclearPrompt": "what task do you mean?",
     "LaunchRequestHandler": {
