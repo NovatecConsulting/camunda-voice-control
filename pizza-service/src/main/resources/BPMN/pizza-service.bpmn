@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_18zlbi9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="pizza-service-collaboration">
-    <bpmn:participant id="pizza-delivery" name="Pizza Delivery" processRef="pizza-service" />
+    <bpmn:participant id="pizza-delivery" name="Pizza delivery" processRef="pizza-service" />
     <bpmn:participant id="customer" name="Customer" />
     <bpmn:messageFlow id="Flow_1e7yuj8" sourceRef="customer" targetRef="incoming-order" />
     <bpmn:messageFlow id="Flow_1oniu02" sourceRef="Activity_1gpe11h" targetRef="customer" />
@@ -25,7 +25,7 @@
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="Flow_0fp2aju" sourceRef="Activity_0ehncch" targetRef="Activity_1gpe11h" />
-    <bpmn:startEvent id="incoming-order" name="Pizza Order" camunda:formKey="">
+    <bpmn:startEvent id="incoming-order" name="Pizza order" camunda:formKey="">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="order" label="Order" type="string" />
@@ -39,7 +39,7 @@
       <bpmn:incoming>Flow_0j29pq6</bpmn:incoming>
       <bpmn:outgoing>Flow_10qqadm</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_1brw0sw" name="Prepare Delivery">
+    <bpmn:userTask id="Activity_1brw0sw" name="Prepare delivery">
       <bpmn:documentation>Please put ${order} in the pizza box.</bpmn:documentation>
       <bpmn:extensionElements>
         <camunda:formData>
@@ -58,11 +58,11 @@
       <bpmn:outgoing>Flow_1tr8dva</bpmn:outgoing>
       <bpmn:outgoing>Flow_1lmsj7n</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_021i8sz" name="Give Discount" camunda:delegateExpression="${discountDelegate}">
+    <bpmn:serviceTask id="Activity_021i8sz" name="Give discount" camunda:delegateExpression="${discountDelegate}">
       <bpmn:incoming>Flow_1tr8dva</bpmn:incoming>
       <bpmn:outgoing>Flow_1epwshs</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0ehncch" name="Generate Invoice" camunda:delegateExpression="${generateInvoiceDelegate}">
+    <bpmn:serviceTask id="Activity_0ehncch" name="Generate invoice" camunda:delegateExpression="${generateInvoiceDelegate}">
       <bpmn:incoming>Flow_1epwshs</bpmn:incoming>
       <bpmn:incoming>Flow_1lmsj7n</bpmn:incoming>
       <bpmn:outgoing>Flow_0fp2aju</bpmn:outgoing>
@@ -79,7 +79,7 @@
     <bpmn:sequenceFlow id="Flow_1epwshs" sourceRef="Activity_021i8sz" targetRef="Activity_0ehncch" />
     <bpmn:sequenceFlow id="Flow_163lm4c" sourceRef="Activity_1gpe11h" targetRef="Activity_1nzz7lu" />
     <bpmn:sequenceFlow id="Flow_16y40p0" sourceRef="Activity_1nzz7lu" targetRef="Event_1b5018t" />
-    <bpmn:endEvent id="Event_1b5018t" name="Pizza delivered and payed">
+    <bpmn:endEvent id="Event_1b5018t" name="Pizza delivered and paid">
       <bpmn:incoming>Flow_16y40p0</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:manualTask id="Activity_1gpe11h" name="Deliver pizza">
@@ -152,7 +152,7 @@
       <bpmndi:BPMNShape id="Event_1geha4b_di" bpmnElement="incoming-order">
         <dc:Bounds x="233" y="307" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="222" y="350" width="60" height="14" />
+          <dc:Bounds x="224" y="350" width="57" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1qexyqs_di" bpmnElement="Activity_033ko0l">
