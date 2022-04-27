@@ -12,7 +12,8 @@
       "9": "what is to do",
       "10": "give me a new task",
       "11": "assign me a task",
-      "12": "assign a task to me"
+      "12": "assign a task to me",
+      "13": "give me the next task"
     },
     "completeTaskSamples": {
       "1": "I completed task {taskId}",
